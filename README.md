@@ -35,6 +35,28 @@ Por lo tanto, ¿no podemos controlarlos? En una casa en la que se busca la efici
 _Inicialmente tenía previsto controlar si los equipos AC estaban conectados con un sensor de consumo eléctrico, pero hace un tiempo leí en un foro una idea brillante: utilizar un sensor magnético de puerta/ventana de Xiaomi Aqara, dado que cuando un equipo AC está encendido, la trampilla de aire se mueve y abre, y cuando esté apagado, se cierra. Haré una foto próximamente_
 
 
+## Seguridad / Security
+
+La seguridad fue una de las bases principales sobre las que empecé, hace años, a montar un sistema de domótica. Estaba muy cansado de pagar una cuota mensual a una central de alarmas que, cuando hacía falta, no servía para nada.
+
+Por supuesto, **la seguridad no es absoluta**, pero a lo largo de los años he conseguido integrar un sistema que cumple ampliamente con mis condiciones:
+- Utiliza dispositivos cableados e inalámbricos
+- Utiliza dispositivos de distintas tecnologías
+- Une sensores de diversos tipos, video y audio
+- Tiene un sistema de simulación de presencia
+- Está redundado: el sistema está comunicado con un servidor externo, y en caso de cortarse la comunicación, inmediatamente lo comunica
+
+El código del sistema de alarma no lo publico por motivos obvios.
+
+El sistema se nutre de un gran número de sensores:
+- Dos alarmas de Visonic, en formato híbrido
+- Sensores en ventanas, puertas y movimiento
+- Cámaras con reconocimiento de objetos (tensorflow y otros componentes)
+
+La gestión de la alarma se realiza con Home Assistant y varios nodos de Node-Red. También existe un panel en la puerta dedicado a la alarma y un sensor RFID oculto con tags que permiten desactivar la alarma.
+
+La alarma, en remoto, está conectada con varios sistemas de aviso: notificaciones al móvil, SMS y Twilio para notificaciones por voz.
+
 ### Markdown
 
 Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for

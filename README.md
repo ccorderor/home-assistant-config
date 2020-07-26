@@ -4,6 +4,16 @@ You can use the [editor on GitHub](https://github.com/ccorderor/home-assistant-c
 
 Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
 
+## Diagramas
+
+![Image](https://github.com/ccorderor/home-assistant-config/raw/master/docs/images/hardware.png)
+
+![Image](https://github.com/ccorderor/home-assistant-config/raw/master/docs/images/zwave.png)
+
+![Image](https://github.com/ccorderor/home-assistant-config/raw/master/docs/images/zigbee.png)
+
+![Image](https://github.com/ccorderor/home-assistant-config/raw/master/docs/images/philipshue.png)
+
 ### Markdown
 
 Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for

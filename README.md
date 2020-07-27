@@ -10,11 +10,36 @@ Debo decirte, para empezar, que aquí encontrarás mucha información. No es ni 
 
 ## Infraestructura
 
+Los inicios de mi casa inteligente estuvieron basados en [OpenHab](https://www.openhab.org/), muy estable, pero muy lento en su desarrollo. Como suele ocurrir con cualquier proyecto Java, hacer cualquier _modificación_ se convertía en algo muy tedioso, por no hablar de lo pesado que era como sistema. Más tarde descubrí [Node-RED](https://nodered.org/), que se convertiría en ese sistema de flujos adictivo para las automatizaciones.
 
+Pasado un tiempo decidí dar el salto a [Home Assistant](https://www.home-assistant.io/), y tengo que admitir que fue la mejor decisión que pude tomar para un hogar digital *DIY*. El cerebro de toda la casa es Home Assistant, y las automatizaciones están repartidas entre las que tengo en HA y todas las que mantengo (y sigo añadiendo en Node-RED). Si, es importante decirlo... un hogar digital nunca para de evolucionar.
 
-## Diagramas
+En cuanto al *hardware*, creo que como casi todo el mundo, todo empezó en una Raspberry Pi. Son cacharros maravillosos, baratos, consumen muy poca energía y muy poco espacio, pero según va creciendo la complejidad, se quedan limitados en potencia. Por ejemplo, es muy dificil meter un sistema CCTV con reconocimiento de caras en una _raspi_.
+
+La evolución natural fue ir a un **NUC** o similar. En el caso de mi casa, todo el sistema está repartido entre dos miniPC, uno de Fujitsu y un Lenovo, ambos con procesadores Intel i3... y sobre todo, consumos muy reducidos (hablamos de equipos que consumen entre 10 y 20W). ¿Y por qué dos ordenadores? La respuesta es sencilla: por una parte, dividir la carga, pero sobre todo, redundancia.
+
+**Redundancia**: Todo el software que corre en las máquinas está basado en imágenes **docker**, todo utilizando docker-compose. Esto permite que, en el caso del fallo de una de las máquinas, pueda volver a levantar el sistema en cuestión de minutos simplemente utilizando un _backup_ y el fichero de despliegue compose.
 
 ![Image](https://github.com/ccorderor/home-assistant-config/raw/master/docs/images/hardware.png)
+
+### Conectividad LAN / Internet
+
+Como en cualquier casa, la conectividad local es un híbrido entre una red ethernet y una red Wi-Fi (en este caso, varias).
+La conexión a internet está redundada, de forma que si la fibra falla, la domótica siga teniendo acceso a la red a través de un MiFi 4G. Todo ello está soportado por un router Mikrotik (no quiero saber nada de los pseudo-routers de las operadoras) y varios switches "semi-managed" para filtrar convenientemente todo el tráfico multicast (IGMP snooping).
+
+Toda la conectividad WiFi de casa se basa en APs de *Ubiquiti* (valen cada céntimo de su precio), con varias redes: una red domestica 2.4Ghz y 5Ghz, una red dedicada a todo el hardware de la domótica y una red para invitados, convenientemente aislada. La red WiFi está aislada de la red cableada y el tráfico se enruta bajo configuración... toda prevención es poca.
+
+### Conectividad domótica
+
+ZWave
+Zigbee
+Cableada
+WiFi
+
+
+## Diagramas
+
+
 
 ![Image](https://github.com/ccorderor/home-assistant-config/raw/master/docs/images/zwave.png)
 

@@ -1,8 +1,16 @@
-## Welcome to GitHub Pages
+## Hogar Digital con Home Assistant... y más
 
-You can use the [editor on GitHub](https://github.com/ccorderor/home-assistant-config/edit/master/README.md) to maintain and preview the content for your website in Markdown files.
+Hace ya unos cuantos años me picó la mosca de la **domótica** y desde ese momento no he parado de cacharrear. Siempre he tenido algo claro, la domótica hecha por uno mismo es la que mejor cumple las necesidades de cada hogar. Este repositorio debe servir como inspiración, y espero que permita que partes del mismo aterricen en otras cosas. Úsalo como inspiración, como fuente de datos, como lo que quieras... pero aprovecha todo lo que quieras.
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
+Mi _smart home_ está basada en Home Assistant y Node Red... con un poquito de allí y otro poquito de allá. ¡Disfruta!
+
+## ¿Qué encontrarás aquí?
+
+Debo decirte, para empezar, que aquí encontrarás mucha información. No es ni mucho menos necesario integrar todo lo que puedes ver aquí para tener un **hogar digital**, pero sirva como aviso a navegantes que la domótica es algo que suele enganchar... y por lo tanto, es posible que una vez que empieces, esto se convierta en un hobbie que nunca termine.
+
+## Infraestructura
+
+
 
 ## Diagramas
 

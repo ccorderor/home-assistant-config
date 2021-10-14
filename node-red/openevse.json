@@ -1,0 +1,527 @@
+[
+    {
+        "id": "4954b7cb.7b47f8",
+        "type": "comment",
+        "z": "46143f82.3c00c",
+        "name": "OpenEVSE - Gestión de carga",
+        "info": "",
+        "x": 220,
+        "y": 1440,
+        "wires": []
+    },
+    {
+        "id": "ef397d14.34d02",
+        "type": "inject",
+        "z": "46143f82.3c00c",
+        "name": "Intervalo 5s",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "5",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 190,
+        "y": 1560,
+        "wires": [
+            [
+                "a6640800.6cbf98"
+            ]
+        ]
+    },
+    {
+        "id": "a6640800.6cbf98",
+        "type": "api-current-state",
+        "z": "46143f82.3c00c",
+        "name": "Corriente Acometida",
+        "server": "7268a3b9.f3b0fc",
+        "version": 2,
+        "outputs": 1,
+        "halt_if": "",
+        "halt_if_type": "str",
+        "halt_if_compare": "is",
+        "entity_id": "sensor.iotawatt_acometida",
+        "state_type": "str",
+        "blockInputOverrides": false,
+        "outputProperties": [
+            {
+                "property": "acometida",
+                "propertyType": "msg",
+                "value": "",
+                "valueType": "entityState"
+            },
+            {
+                "property": "data",
+                "propertyType": "msg",
+                "value": "",
+                "valueType": "entity"
+            }
+        ],
+        "override_topic": false,
+        "state_location": "payload",
+        "override_payload": "msg",
+        "entity_location": "data",
+        "override_data": "msg",
+        "x": 410,
+        "y": 1560,
+        "wires": [
+            [
+                "89e7b5b7.304628"
+            ]
+        ]
+    },
+    {
+        "id": "7defcae8.19a7c4",
+        "type": "function",
+        "z": "46143f82.3c00c",
+        "name": "Excedentes",
+        "func": "var acometida = parseInt(msg.acometida);\n\n\n\n//acometida = acometida\n//acometida = -1600\n\n\n\n\n\n// semana\nmsg.payload = acometida\n\n\n\nreturn msg;\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "x": 870,
+        "y": 1640,
+        "wires": [
+            [
+                "d2a43cdb.cd69e",
+                "30eb58c0.35c608"
+            ]
+        ]
+    },
+    {
+        "id": "d2a43cdb.cd69e",
+        "type": "debug",
+        "z": "46143f82.3c00c",
+        "name": "Valor enviado a OpenEVSE",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1260,
+        "y": 1780,
+        "wires": []
+    },
+    {
+        "id": "30eb58c0.35c608",
+        "type": "mqtt out",
+        "z": "46143f82.3c00c",
+        "name": "",
+        "topic": "openevse/available_power",
+        "qos": "",
+        "retain": "",
+        "broker": "56258d61.b7acc4",
+        "x": 1160,
+        "y": 1600,
+        "wires": []
+    },
+    {
+        "id": "b20c9333.35cd",
+        "type": "function",
+        "z": "46143f82.3c00c",
+        "name": "Carga Grid",
+        "func": "var acometida = parseInt(msg.acometida);\n\n\nvar maxCurrent = parseInt(global.get('max_ev_current_from_grid', 0))\n\nnode.error(maxCurrent)\n\n\nacometida = (maxCurrent - acometida) * -1\n\n\n// semana\nmsg.payload = acometida\n\n\n\nreturn msg;\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "x": 830,
+        "y": 1740,
+        "wires": [
+            [
+                "d2a43cdb.cd69e",
+                "30eb58c0.35c608"
+            ]
+        ]
+    },
+    {
+        "id": "f0f3169d.56e658",
+        "type": "poll-state",
+        "z": "46143f82.3c00c",
+        "name": "Corriente máxima grid",
+        "server": "7268a3b9.f3b0fc",
+        "version": 1,
+        "exposeToHomeAssistant": false,
+        "haConfig": [
+            {
+                "property": "name",
+                "value": ""
+            },
+            {
+                "property": "icon",
+                "value": ""
+            }
+        ],
+        "updateinterval": "5",
+        "updateIntervalUnits": "seconds",
+        "outputinitially": false,
+        "outputonchanged": false,
+        "entity_id": "input_number.watts_carga_maxima_grid",
+        "state_type": "str",
+        "halt_if": "",
+        "halt_if_type": "str",
+        "halt_if_compare": "is",
+        "outputs": 1,
+        "x": 260,
+        "y": 2080,
+        "wires": [
+            [
+                "9d54551a.784ec8"
+            ]
+        ]
+    },
+    {
+        "id": "9d54551a.784ec8",
+        "type": "function",
+        "z": "46143f82.3c00c",
+        "name": "",
+        "func": "global.set('max_ev_current_from_grid',msg.payload)\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "x": 550,
+        "y": 2080,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "89e7b5b7.304628",
+        "type": "api-current-state",
+        "z": "46143f82.3c00c",
+        "name": "modo carga",
+        "server": "7268a3b9.f3b0fc",
+        "version": 2,
+        "outputs": 1,
+        "halt_if": "",
+        "halt_if_type": "str",
+        "halt_if_compare": "is",
+        "entity_id": "input_select.modo_carga_coche",
+        "state_type": "str",
+        "blockInputOverrides": false,
+        "outputProperties": [
+            {
+                "property": "payload",
+                "propertyType": "msg",
+                "value": "",
+                "valueType": "entityState"
+            },
+            {
+                "property": "data",
+                "propertyType": "msg",
+                "value": "",
+                "valueType": "entity"
+            }
+        ],
+        "override_topic": false,
+        "state_location": "payload",
+        "override_payload": "msg",
+        "entity_location": "data",
+        "override_data": "msg",
+        "x": 250,
+        "y": 1700,
+        "wires": [
+            [
+                "a3a60b3b.dd68b8"
+            ]
+        ]
+    },
+    {
+        "id": "a3a60b3b.dd68b8",
+        "type": "switch",
+        "z": "46143f82.3c00c",
+        "name": "",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "Auto",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "FV Only",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "Manual",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "Off",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "Min 6A",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 5,
+        "x": 310,
+        "y": 1900,
+        "wires": [
+            [
+                "cb8662e.b5c27a"
+            ],
+            [
+                "7defcae8.19a7c4"
+            ],
+            [
+                "b20c9333.35cd"
+            ],
+            [
+                "39cc6dbd.f16982"
+            ],
+            [
+                "2c067d3e.054912"
+            ]
+        ]
+    },
+    {
+        "id": "723d5f96.352ea",
+        "type": "function",
+        "z": "46143f82.3c00c",
+        "name": "Min 6A",
+        "func": "var acometida = parseInt(msg.acometida);\n\n\n\n//acometida = acometida\n//acometida = -1600\nnode.error(\"Acometida: \"+acometida)\n\nvar min = parseInt(((msg.volts * 6) * 1.10) * -1) + parseInt(msg.ev)\n\nif (acometida > min) {\n    node.error(\"Enviando mínimo\")\n    acometida = min\n}\n\n\n// semana\nmsg.payload = parseInt(acometida) \n\n\n\nreturn msg;\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "x": 980,
+        "y": 1940,
+        "wires": [
+            [
+                "d2a43cdb.cd69e",
+                "30eb58c0.35c608"
+            ]
+        ]
+    },
+    {
+        "id": "2c067d3e.054912",
+        "type": "api-current-state",
+        "z": "46143f82.3c00c",
+        "name": "voltaje",
+        "server": "7268a3b9.f3b0fc",
+        "version": 2,
+        "outputs": 1,
+        "halt_if": "",
+        "halt_if_type": "str",
+        "halt_if_compare": "is",
+        "entity_id": "sensor.iotawatt_volts",
+        "state_type": "str",
+        "blockInputOverrides": false,
+        "outputProperties": [
+            {
+                "property": "volts",
+                "propertyType": "msg",
+                "value": "",
+                "valueType": "entityState"
+            },
+            {
+                "property": "data",
+                "propertyType": "msg",
+                "value": "",
+                "valueType": "entity"
+            }
+        ],
+        "override_topic": false,
+        "state_location": "payload",
+        "override_payload": "msg",
+        "entity_location": "data",
+        "override_data": "msg",
+        "x": 610,
+        "y": 1940,
+        "wires": [
+            [
+                "d3034620.813688"
+            ]
+        ]
+    },
+    {
+        "id": "39cc6dbd.f16982",
+        "type": "function",
+        "z": "46143f82.3c00c",
+        "name": "Zero",
+        "func": "\n\n//acometida = (maxCurrent - acometida) * -1\n//node.error(acometida)\n\n\nvar acometida = 5000\n\n\n// semana\nmsg.payload = acometida\n\n\n\nreturn msg;\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "x": 890,
+        "y": 1840,
+        "wires": [
+            [
+                "30eb58c0.35c608",
+                "d2a43cdb.cd69e"
+            ]
+        ]
+    },
+    {
+        "id": "d3034620.813688",
+        "type": "api-current-state",
+        "z": "46143f82.3c00c",
+        "name": "watts ev",
+        "server": "7268a3b9.f3b0fc",
+        "version": 2,
+        "outputs": 1,
+        "halt_if": "",
+        "halt_if_type": "str",
+        "halt_if_compare": "is",
+        "entity_id": "sensor.iotawatt_ev",
+        "state_type": "str",
+        "blockInputOverrides": false,
+        "outputProperties": [
+            {
+                "property": "ev",
+                "propertyType": "msg",
+                "value": "",
+                "valueType": "entityState"
+            },
+            {
+                "property": "data",
+                "propertyType": "msg",
+                "value": "",
+                "valueType": "entity"
+            }
+        ],
+        "override_topic": false,
+        "state_location": "payload",
+        "override_payload": "msg",
+        "entity_location": "data",
+        "override_data": "msg",
+        "x": 780,
+        "y": 1940,
+        "wires": [
+            [
+                "723d5f96.352ea"
+            ]
+        ]
+    },
+    {
+        "id": "cb8662e.b5c27a",
+        "type": "api-current-state",
+        "z": "46143f82.3c00c",
+        "name": "Status PVPC",
+        "server": "7268a3b9.f3b0fc",
+        "version": 2,
+        "outputs": 1,
+        "halt_if": "",
+        "halt_if_type": "str",
+        "halt_if_compare": "is",
+        "entity_id": "sensor.pvpc",
+        "state_type": "str",
+        "blockInputOverrides": false,
+        "outputProperties": [
+            {
+                "property": "payload",
+                "propertyType": "msg",
+                "value": "",
+                "valueType": "entityState"
+            },
+            {
+                "property": "data",
+                "propertyType": "msg",
+                "value": "",
+                "valueType": "entity"
+            }
+        ],
+        "override_topic": false,
+        "state_location": "payload",
+        "override_payload": "msg",
+        "entity_location": "data",
+        "override_data": "msg",
+        "x": 490,
+        "y": 1700,
+        "wires": [
+            [
+                "4144fe51.3be32"
+            ]
+        ]
+    },
+    {
+        "id": "4144fe51.3be32",
+        "type": "switch",
+        "z": "46143f82.3c00c",
+        "name": "",
+        "property": "data.attributes.period",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "P3",
+                "vt": "str"
+            },
+            {
+                "t": "else"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 630,
+        "y": 1640,
+        "wires": [
+            [
+                "b20c9333.35cd"
+            ],
+            [
+                "7defcae8.19a7c4"
+            ]
+        ]
+    },
+    {
+        "id": "7268a3b9.f3b0fc",
+        "type": "server",
+        "z": "",
+        "name": "Home Assistant",
+        "version": 1,
+        "legacy": false,
+        "addon": false,
+        "rejectUnauthorizedCerts": true,
+        "ha_boolean": "y|yes|true|on|home|open",
+        "connectionDelay": true,
+        "cacheJson": true
+    },
+    {
+        "id": "56258d61.b7acc4",
+        "type": "mqtt-broker",
+        "z": "",
+        "name": "",
+        "broker": "",
+        "port": "1883",
+        "clientid": "",
+        "usetls": false,
+        "compatmode": true,
+        "keepalive": "60",
+        "cleansession": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthPayload": "",
+        "closeTopic": "",
+        "closeQos": "0",
+        "closePayload": "",
+        "willTopic": "",
+        "willQos": "0",
+        "willPayload": ""
+    }
+]

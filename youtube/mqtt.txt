@@ -1,0 +1,21 @@
+entrada docker-compose:
+  
+  mqtt:
+    container_name: mosquitto
+    image: eclipse-mosquitto:1.6
+    ports:
+      - "1883:1883"
+      - "9001:9001"
+    volumes:
+      - /docker/mosquitto/config:/mqtt/config
+      - /docker/mosquitto/log:/mqtt/log
+      - /docker/mosquitto/data/:/mqtt/data
+      
+      
+fichero mosquitto.conf:
+  
+allow_anonymous true
+pid_file /var/run/mosquitto.pid
+persistence true
+persistence_location /mqtt/data/
+log_dest file /mqtt/log/mosquitto.log

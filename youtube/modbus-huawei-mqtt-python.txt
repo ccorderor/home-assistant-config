@@ -1,0 +1,1247 @@
+[
+    {
+        "id": "c8473c8.8c881c",
+        "type": "mqtt in",
+        "z": "abc13765.990d38",
+        "name": "Meter",
+        "topic": "emon/NodeHuawei/Meter",
+        "qos": "2",
+        "datatype": "auto",
+        "broker": "56258d61.b7acc4",
+        "x": 240,
+        "y": 160,
+        "wires": [
+            [
+                "614f3eda.f57b2"
+            ]
+        ]
+    },
+    {
+        "id": "89744bc2.b22fb8",
+        "type": "mqtt in",
+        "z": "abc13765.990d38",
+        "name": "EnergiaDia",
+        "topic": "emon/NodeHuawei/EnergiaDia",
+        "qos": "2",
+        "datatype": "auto",
+        "broker": "56258d61.b7acc4",
+        "x": 240,
+        "y": 220,
+        "wires": [
+            [
+                "d7cf06b8.a10468"
+            ]
+        ]
+    },
+    {
+        "id": "a6549122.8a14f",
+        "type": "mqtt in",
+        "z": "abc13765.990d38",
+        "name": "Power_inversor",
+        "topic": "emon/NodeHuawei/Power_inversor",
+        "qos": "2",
+        "datatype": "auto",
+        "broker": "56258d61.b7acc4",
+        "x": 260,
+        "y": 320,
+        "wires": [
+            [
+                "6b228f03.66f6"
+            ]
+        ]
+    },
+    {
+        "id": "990130f7.92d4f",
+        "type": "mqtt in",
+        "z": "abc13765.990d38",
+        "name": "Power_pico",
+        "topic": "emon/NodeHuawei/Power_pico",
+        "qos": "2",
+        "datatype": "auto",
+        "broker": "56258d61.b7acc4",
+        "x": 250,
+        "y": 420,
+        "wires": [
+            [
+                "21c67cd4.d7e714"
+            ]
+        ]
+    },
+    {
+        "id": "b921fc56.582f",
+        "type": "mqtt in",
+        "z": "abc13765.990d38",
+        "name": "pv_01_voltage",
+        "topic": "emon/NodeHuawei/pv_01_voltage",
+        "qos": "2",
+        "datatype": "auto",
+        "broker": "56258d61.b7acc4",
+        "x": 260,
+        "y": 520,
+        "wires": [
+            [
+                "4a23d5a5.ea2e3c"
+            ]
+        ]
+    },
+    {
+        "id": "1b862c2d.2e79a4",
+        "type": "mqtt in",
+        "z": "abc13765.990d38",
+        "name": "pv_01_current",
+        "topic": "emon/NodeHuawei/pv_01_current",
+        "qos": "2",
+        "datatype": "auto",
+        "broker": "56258d61.b7acc4",
+        "x": 250,
+        "y": 580,
+        "wires": [
+            [
+                "c659f34.c4a651"
+            ]
+        ]
+    },
+    {
+        "id": "1517c590.70a7ba",
+        "type": "mqtt in",
+        "z": "abc13765.990d38",
+        "name": "pv_02_voltage",
+        "topic": "emon/NodeHuawei/pv_02_voltage",
+        "qos": "2",
+        "datatype": "auto",
+        "broker": "56258d61.b7acc4",
+        "x": 260,
+        "y": 640,
+        "wires": [
+            [
+                "b142d481.1099d8"
+            ]
+        ]
+    },
+    {
+        "id": "9498a1d4.33848",
+        "type": "mqtt in",
+        "z": "abc13765.990d38",
+        "name": "pv_02_current",
+        "topic": "emon/NodeHuawei/pv_02_current",
+        "qos": "2",
+        "datatype": "auto",
+        "broker": "56258d61.b7acc4",
+        "x": 250,
+        "y": 700,
+        "wires": [
+            [
+                "55d30dce.323834"
+            ]
+        ]
+    },
+    {
+        "id": "3e0e1b95.6c6fe4",
+        "type": "mqtt in",
+        "z": "abc13765.990d38",
+        "name": "input_power",
+        "topic": "emon/NodeHuawei/input_power",
+        "qos": "2",
+        "datatype": "auto",
+        "broker": "56258d61.b7acc4",
+        "x": 250,
+        "y": 760,
+        "wires": [
+            [
+                "a54309c1.2f2ea8"
+            ]
+        ]
+    },
+    {
+        "id": "764bc305.74a06c",
+        "type": "mqtt in",
+        "z": "abc13765.990d38",
+        "name": "internal_temperature",
+        "topic": "emon/NodeHuawei/internal_temperature",
+        "qos": "2",
+        "datatype": "auto",
+        "broker": "56258d61.b7acc4",
+        "x": 270,
+        "y": 820,
+        "wires": [
+            [
+                "eb6b748.b7ee088"
+            ]
+        ]
+    },
+    {
+        "id": "be80cf6c.11a67",
+        "type": "mqtt in",
+        "z": "abc13765.990d38",
+        "name": "grid_voltage",
+        "topic": "emon/NodeHuawei/grid_voltage",
+        "qos": "2",
+        "datatype": "auto",
+        "broker": "56258d61.b7acc4",
+        "x": 250,
+        "y": 880,
+        "wires": [
+            [
+                "67a2463d.90a1f8"
+            ]
+        ]
+    },
+    {
+        "id": "eac02de9.f5dd4",
+        "type": "mqtt in",
+        "z": "abc13765.990d38",
+        "name": "grid_exported_energy",
+        "topic": "emon/NodeHuawei/grid_exported_energy",
+        "qos": "2",
+        "datatype": "auto",
+        "broker": "56258d61.b7acc4",
+        "x": 280,
+        "y": 1000,
+        "wires": [
+            [
+                "dbbae2df.90b38"
+            ]
+        ]
+    },
+    {
+        "id": "26373512.9d3aca",
+        "type": "mqtt in",
+        "z": "abc13765.990d38",
+        "name": "grid_accumulated_energy",
+        "topic": "emon/NodeHuawei/grid_accumulated_energy",
+        "qos": "2",
+        "datatype": "auto",
+        "broker": "56258d61.b7acc4",
+        "x": 290,
+        "y": 1060,
+        "wires": [
+            [
+                "622b31d1.184de"
+            ]
+        ]
+    },
+    {
+        "id": "cb121cd7.47e25",
+        "type": "ha-entity",
+        "z": "abc13765.990d38",
+        "name": "huawei_power_meter_active_power",
+        "server": "7268a3b9.f3b0fc",
+        "version": 1,
+        "debugenabled": false,
+        "outputs": 1,
+        "entityType": "sensor",
+        "config": [
+            {
+                "property": "name",
+                "value": "huawei_power_meter_active_power"
+            },
+            {
+                "property": "device_class",
+                "value": "power"
+            },
+            {
+                "property": "icon",
+                "value": ""
+            },
+            {
+                "property": "unit_of_measurement",
+                "value": "W"
+            }
+        ],
+        "state": "payload",
+        "stateType": "msg",
+        "attributes": [],
+        "resend": true,
+        "outputLocation": "",
+        "outputLocationType": "none",
+        "inputOverride": "allow",
+        "outputOnStateChange": false,
+        "outputPayload": "$entity().state ? \"on\": \"off\"",
+        "outputPayloadType": "jsonata",
+        "x": 730,
+        "y": 140,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "a0cc9891.19a2b8",
+        "type": "ha-entity",
+        "z": "abc13765.990d38",
+        "name": "huawei_daily_yield_energy",
+        "server": "7268a3b9.f3b0fc",
+        "version": 1,
+        "debugenabled": false,
+        "outputs": 1,
+        "entityType": "sensor",
+        "config": [
+            {
+                "property": "name",
+                "value": "huawei_daily_yield_energy"
+            },
+            {
+                "property": "device_class",
+                "value": "power"
+            },
+            {
+                "property": "icon",
+                "value": ""
+            },
+            {
+                "property": "unit_of_measurement",
+                "value": "KWh"
+            }
+        ],
+        "state": "payload",
+        "stateType": "msg",
+        "attributes": [],
+        "resend": true,
+        "outputLocation": "",
+        "outputLocationType": "none",
+        "inputOverride": "allow",
+        "outputOnStateChange": false,
+        "outputPayload": "$entity().state ? \"on\": \"off\"",
+        "outputPayloadType": "jsonata",
+        "x": 720,
+        "y": 220,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "481bf9d2.003c28",
+        "type": "ha-entity",
+        "z": "abc13765.990d38",
+        "name": "huawei_active_power",
+        "server": "7268a3b9.f3b0fc",
+        "version": 1,
+        "debugenabled": false,
+        "outputs": 1,
+        "entityType": "sensor",
+        "config": [
+            {
+                "property": "name",
+                "value": "huawei_active_power"
+            },
+            {
+                "property": "device_class",
+                "value": "power"
+            },
+            {
+                "property": "icon",
+                "value": ""
+            },
+            {
+                "property": "unit_of_measurement",
+                "value": "W"
+            }
+        ],
+        "state": "payload",
+        "stateType": "msg",
+        "attributes": [],
+        "resend": true,
+        "outputLocation": "",
+        "outputLocationType": "none",
+        "inputOverride": "allow",
+        "outputOnStateChange": false,
+        "outputPayload": "$entity().state ? \"on\": \"off\"",
+        "outputPayloadType": "jsonata",
+        "x": 720,
+        "y": 320,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "a2b4a5d6.1615a8",
+        "type": "ha-entity",
+        "z": "abc13765.990d38",
+        "name": "huawei_day_active_power_peak",
+        "server": "7268a3b9.f3b0fc",
+        "version": 1,
+        "debugenabled": false,
+        "outputs": 1,
+        "entityType": "sensor",
+        "config": [
+            {
+                "property": "name",
+                "value": "huawei_day_active_power_peak"
+            },
+            {
+                "property": "device_class",
+                "value": "power"
+            },
+            {
+                "property": "icon",
+                "value": ""
+            },
+            {
+                "property": "unit_of_measurement",
+                "value": "W"
+            }
+        ],
+        "state": "payload",
+        "stateType": "msg",
+        "attributes": [],
+        "resend": true,
+        "outputLocation": "",
+        "outputLocationType": "none",
+        "inputOverride": "allow",
+        "outputOnStateChange": false,
+        "outputPayload": "$entity().state ? \"on\": \"off\"",
+        "outputPayloadType": "jsonata",
+        "x": 730,
+        "y": 420,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "fadf4f7b.b052",
+        "type": "ha-entity",
+        "z": "abc13765.990d38",
+        "name": "huawei_pv_01_voltage",
+        "server": "7268a3b9.f3b0fc",
+        "version": 1,
+        "debugenabled": false,
+        "outputs": 1,
+        "entityType": "sensor",
+        "config": [
+            {
+                "property": "name",
+                "value": "huawei_pv_01_voltage"
+            },
+            {
+                "property": "device_class",
+                "value": "power"
+            },
+            {
+                "property": "icon",
+                "value": ""
+            },
+            {
+                "property": "unit_of_measurement",
+                "value": "V"
+            }
+        ],
+        "state": "payload",
+        "stateType": "msg",
+        "attributes": [],
+        "resend": true,
+        "outputLocation": "",
+        "outputLocationType": "none",
+        "inputOverride": "allow",
+        "outputOnStateChange": false,
+        "outputPayload": "$entity().state ? \"on\": \"off\"",
+        "outputPayloadType": "jsonata",
+        "x": 720,
+        "y": 520,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "2484a054.958b4",
+        "type": "ha-entity",
+        "z": "abc13765.990d38",
+        "name": "huawei_pv_01_current",
+        "server": "7268a3b9.f3b0fc",
+        "version": 1,
+        "debugenabled": false,
+        "outputs": 1,
+        "entityType": "sensor",
+        "config": [
+            {
+                "property": "name",
+                "value": "huawei_pv_01_current"
+            },
+            {
+                "property": "device_class",
+                "value": "power"
+            },
+            {
+                "property": "icon",
+                "value": ""
+            },
+            {
+                "property": "unit_of_measurement",
+                "value": "A"
+            }
+        ],
+        "state": "payload",
+        "stateType": "msg",
+        "attributes": [],
+        "resend": true,
+        "outputLocation": "",
+        "outputLocationType": "none",
+        "inputOverride": "allow",
+        "outputOnStateChange": false,
+        "outputPayload": "$entity().state ? \"on\": \"off\"",
+        "outputPayloadType": "jsonata",
+        "x": 720,
+        "y": 580,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "8fd7334a.564c2",
+        "type": "ha-entity",
+        "z": "abc13765.990d38",
+        "name": "huawei_pv_02_voltage",
+        "server": "7268a3b9.f3b0fc",
+        "version": 1,
+        "debugenabled": false,
+        "outputs": 1,
+        "entityType": "sensor",
+        "config": [
+            {
+                "property": "name",
+                "value": "huawei_pv_02_voltage"
+            },
+            {
+                "property": "device_class",
+                "value": "power"
+            },
+            {
+                "property": "icon",
+                "value": ""
+            },
+            {
+                "property": "unit_of_measurement",
+                "value": "V"
+            }
+        ],
+        "state": "payload",
+        "stateType": "msg",
+        "attributes": [],
+        "resend": true,
+        "outputLocation": "",
+        "outputLocationType": "none",
+        "inputOverride": "allow",
+        "outputOnStateChange": false,
+        "outputPayload": "$entity().state ? \"on\": \"off\"",
+        "outputPayloadType": "jsonata",
+        "x": 720,
+        "y": 640,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "80b637f9.3ea988",
+        "type": "ha-entity",
+        "z": "abc13765.990d38",
+        "name": "huawei_pv_02_current",
+        "server": "7268a3b9.f3b0fc",
+        "version": 1,
+        "debugenabled": false,
+        "outputs": 1,
+        "entityType": "sensor",
+        "config": [
+            {
+                "property": "name",
+                "value": "huawei_pv_02_current"
+            },
+            {
+                "property": "device_class",
+                "value": "power"
+            },
+            {
+                "property": "icon",
+                "value": ""
+            },
+            {
+                "property": "unit_of_measurement",
+                "value": "A"
+            }
+        ],
+        "state": "payload",
+        "stateType": "msg",
+        "attributes": [],
+        "resend": true,
+        "outputLocation": "",
+        "outputLocationType": "none",
+        "inputOverride": "allow",
+        "outputOnStateChange": false,
+        "outputPayload": "$entity().state ? \"on\": \"off\"",
+        "outputPayloadType": "jsonata",
+        "x": 720,
+        "y": 700,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "a54309c1.2f2ea8",
+        "type": "ha-entity",
+        "z": "abc13765.990d38",
+        "name": "huawei_input_power",
+        "server": "7268a3b9.f3b0fc",
+        "version": 1,
+        "debugenabled": false,
+        "outputs": 1,
+        "entityType": "sensor",
+        "config": [
+            {
+                "property": "name",
+                "value": "huawei_input_power"
+            },
+            {
+                "property": "device_class",
+                "value": "power"
+            },
+            {
+                "property": "icon",
+                "value": ""
+            },
+            {
+                "property": "unit_of_measurement",
+                "value": "W"
+            }
+        ],
+        "state": "payload",
+        "stateType": "msg",
+        "attributes": [],
+        "resend": true,
+        "outputLocation": "",
+        "outputLocationType": "none",
+        "inputOverride": "allow",
+        "outputOnStateChange": false,
+        "outputPayload": "$entity().state ? \"on\": \"off\"",
+        "outputPayloadType": "jsonata",
+        "x": 720,
+        "y": 760,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "16e1ff6.fb71701",
+        "type": "ha-entity",
+        "z": "abc13765.990d38",
+        "name": "huawei_internal_temperature",
+        "server": "7268a3b9.f3b0fc",
+        "version": 1,
+        "debugenabled": false,
+        "outputs": 1,
+        "entityType": "sensor",
+        "config": [
+            {
+                "property": "name",
+                "value": "huawei_internal_temperature"
+            },
+            {
+                "property": "device_class",
+                "value": ""
+            },
+            {
+                "property": "icon",
+                "value": ""
+            },
+            {
+                "property": "unit_of_measurement",
+                "value": "oC"
+            }
+        ],
+        "state": "payload",
+        "stateType": "msg",
+        "attributes": [],
+        "resend": true,
+        "outputLocation": "",
+        "outputLocationType": "none",
+        "inputOverride": "allow",
+        "outputOnStateChange": false,
+        "outputPayload": "$entity().state ? \"on\": \"off\"",
+        "outputPayloadType": "jsonata",
+        "x": 740,
+        "y": 820,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "a97f36fa.d8dd98",
+        "type": "ha-entity",
+        "z": "abc13765.990d38",
+        "name": "huawei_grid_voltage",
+        "server": "7268a3b9.f3b0fc",
+        "version": 1,
+        "debugenabled": false,
+        "outputs": 1,
+        "entityType": "sensor",
+        "config": [
+            {
+                "property": "name",
+                "value": "huawei_grid_voltage"
+            },
+            {
+                "property": "device_class",
+                "value": "power"
+            },
+            {
+                "property": "icon",
+                "value": ""
+            },
+            {
+                "property": "unit_of_measurement",
+                "value": "V"
+            }
+        ],
+        "state": "payload",
+        "stateType": "msg",
+        "attributes": [],
+        "resend": true,
+        "outputLocation": "",
+        "outputLocationType": "none",
+        "inputOverride": "allow",
+        "outputOnStateChange": false,
+        "outputPayload": "$entity().state ? \"on\": \"off\"",
+        "outputPayloadType": "jsonata",
+        "x": 720,
+        "y": 880,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "32161134.dcc21e",
+        "type": "ha-entity",
+        "z": "abc13765.990d38",
+        "name": "huawei_grid_exported_energy",
+        "server": "7268a3b9.f3b0fc",
+        "version": 1,
+        "debugenabled": false,
+        "outputs": 1,
+        "entityType": "sensor",
+        "config": [
+            {
+                "property": "name",
+                "value": "huawei_grid_exported_energy"
+            },
+            {
+                "property": "device_class",
+                "value": "power"
+            },
+            {
+                "property": "icon",
+                "value": ""
+            },
+            {
+                "property": "unit_of_measurement",
+                "value": "KWh"
+            }
+        ],
+        "state": "payload",
+        "stateType": "msg",
+        "attributes": [],
+        "resend": true,
+        "outputLocation": "",
+        "outputLocationType": "none",
+        "inputOverride": "allow",
+        "outputOnStateChange": false,
+        "outputPayload": "$entity().state ? \"on\": \"off\"",
+        "outputPayloadType": "jsonata",
+        "x": 730,
+        "y": 1000,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "5d8d378e.6b2eb8",
+        "type": "ha-entity",
+        "z": "abc13765.990d38",
+        "name": "huawei_grid_accumulated_energy",
+        "server": "7268a3b9.f3b0fc",
+        "version": 1,
+        "debugenabled": false,
+        "outputs": 1,
+        "entityType": "sensor",
+        "config": [
+            {
+                "property": "name",
+                "value": "huawei_grid_accumulated_energy"
+            },
+            {
+                "property": "device_class",
+                "value": "power"
+            },
+            {
+                "property": "icon",
+                "value": ""
+            },
+            {
+                "property": "unit_of_measurement",
+                "value": "KWh"
+            }
+        ],
+        "state": "payload",
+        "stateType": "msg",
+        "attributes": [],
+        "resend": true,
+        "outputLocation": "",
+        "outputLocationType": "none",
+        "inputOverride": "allow",
+        "outputOnStateChange": false,
+        "outputPayload": "$entity().state ? \"on\": \"off\"",
+        "outputPayloadType": "jsonata",
+        "x": 740,
+        "y": 1060,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "a9542410.5d3568",
+        "type": "mqtt in",
+        "z": "abc13765.990d38",
+        "name": "power_meter_active_power",
+        "topic": "emon/NodeHuawei/power_meter_active_power",
+        "qos": "2",
+        "datatype": "auto",
+        "broker": "56258d61.b7acc4",
+        "x": 280,
+        "y": 100,
+        "wires": [
+            [
+                "614f3eda.f57b2"
+            ]
+        ]
+    },
+    {
+        "id": "b6b02886.f308e8",
+        "type": "mqtt in",
+        "z": "abc13765.990d38",
+        "name": "daily_yield_energy",
+        "topic": "emon/NodeHuawei/daily_yield_energy",
+        "qos": "2",
+        "datatype": "auto",
+        "broker": "56258d61.b7acc4",
+        "x": 270,
+        "y": 260,
+        "wires": [
+            [
+                "d7cf06b8.a10468"
+            ]
+        ]
+    },
+    {
+        "id": "23a58036.bec19",
+        "type": "mqtt in",
+        "z": "abc13765.990d38",
+        "name": "active_power",
+        "topic": "emon/NodeHuawei/active_power",
+        "qos": "2",
+        "datatype": "auto",
+        "broker": "56258d61.b7acc4",
+        "x": 250,
+        "y": 360,
+        "wires": [
+            [
+                "6b228f03.66f6"
+            ]
+        ]
+    },
+    {
+        "id": "437dda55.1166b4",
+        "type": "mqtt in",
+        "z": "abc13765.990d38",
+        "name": "day_active_power_peak",
+        "topic": "emon/NodeHuawei/day_active_power_peak",
+        "qos": "2",
+        "datatype": "auto",
+        "broker": "56258d61.b7acc4",
+        "x": 290,
+        "y": 460,
+        "wires": [
+            [
+                "21c67cd4.d7e714"
+            ]
+        ]
+    },
+    {
+        "id": "614f3eda.f57b2",
+        "type": "switch",
+        "z": "abc13765.990d38",
+        "name": "",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "btwn",
+                "v": "-10000",
+                "vt": "num",
+                "v2": "10000",
+                "v2t": "num"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 1,
+        "x": 490,
+        "y": 120,
+        "wires": [
+            [
+                "cb121cd7.47e25"
+            ]
+        ]
+    },
+    {
+        "id": "d7cf06b8.a10468",
+        "type": "switch",
+        "z": "abc13765.990d38",
+        "name": "",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "btwn",
+                "v": "0",
+                "vt": "num",
+                "v2": "100",
+                "v2t": "num"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 1,
+        "x": 450,
+        "y": 220,
+        "wires": [
+            [
+                "a0cc9891.19a2b8"
+            ]
+        ]
+    },
+    {
+        "id": "6b228f03.66f6",
+        "type": "switch",
+        "z": "abc13765.990d38",
+        "name": "",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "btwn",
+                "v": "0",
+                "vt": "num",
+                "v2": "8000",
+                "v2t": "num"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 1,
+        "x": 470,
+        "y": 320,
+        "wires": [
+            [
+                "481bf9d2.003c28"
+            ]
+        ]
+    },
+    {
+        "id": "21c67cd4.d7e714",
+        "type": "switch",
+        "z": "abc13765.990d38",
+        "name": "",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "btwn",
+                "v": "0",
+                "vt": "num",
+                "v2": "8000",
+                "v2t": "num"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 1,
+        "x": 470,
+        "y": 420,
+        "wires": [
+            [
+                "a2b4a5d6.1615a8"
+            ]
+        ]
+    },
+    {
+        "id": "4a23d5a5.ea2e3c",
+        "type": "switch",
+        "z": "abc13765.990d38",
+        "name": "",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "btwn",
+                "v": "0",
+                "vt": "num",
+                "v2": "600",
+                "v2t": "num"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 1,
+        "x": 450,
+        "y": 520,
+        "wires": [
+            [
+                "fadf4f7b.b052"
+            ]
+        ]
+    },
+    {
+        "id": "b142d481.1099d8",
+        "type": "switch",
+        "z": "abc13765.990d38",
+        "name": "",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "btwn",
+                "v": "0",
+                "vt": "num",
+                "v2": "600",
+                "v2t": "num"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 1,
+        "x": 470,
+        "y": 640,
+        "wires": [
+            [
+                "8fd7334a.564c2"
+            ]
+        ]
+    },
+    {
+        "id": "5a62bb5d.91f894",
+        "type": "switch",
+        "z": "abc13765.990d38",
+        "name": "",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "btwn",
+                "v": "0",
+                "vt": "num",
+                "v2": "8000",
+                "v2t": "num"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 1,
+        "x": 470,
+        "y": 760,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "eb6b748.b7ee088",
+        "type": "switch",
+        "z": "abc13765.990d38",
+        "name": "",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "btwn",
+                "v": "0",
+                "vt": "num",
+                "v2": "150",
+                "v2t": "num"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 1,
+        "x": 490,
+        "y": 820,
+        "wires": [
+            [
+                "16e1ff6.fb71701"
+            ]
+        ]
+    },
+    {
+        "id": "c659f34.c4a651",
+        "type": "switch",
+        "z": "abc13765.990d38",
+        "name": "",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "btwn",
+                "v": "0",
+                "vt": "num",
+                "v2": "20",
+                "v2t": "num"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 1,
+        "x": 450,
+        "y": 580,
+        "wires": [
+            [
+                "2484a054.958b4"
+            ]
+        ]
+    },
+    {
+        "id": "55d30dce.323834",
+        "type": "switch",
+        "z": "abc13765.990d38",
+        "name": "",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "btwn",
+                "v": "0",
+                "vt": "num",
+                "v2": "20",
+                "v2t": "num"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 1,
+        "x": 470,
+        "y": 700,
+        "wires": [
+            [
+                "80b637f9.3ea988"
+            ]
+        ]
+    },
+    {
+        "id": "67a2463d.90a1f8",
+        "type": "switch",
+        "z": "abc13765.990d38",
+        "name": "",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "btwn",
+                "v": "0",
+                "vt": "num",
+                "v2": "300",
+                "v2t": "num"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 1,
+        "x": 470,
+        "y": 880,
+        "wires": [
+            [
+                "a97f36fa.d8dd98"
+            ]
+        ]
+    },
+    {
+        "id": "dbbae2df.90b38",
+        "type": "switch",
+        "z": "abc13765.990d38",
+        "name": "",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "btwn",
+                "v": "0",
+                "vt": "num",
+                "v2": "10000",
+                "v2t": "num"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 1,
+        "x": 490,
+        "y": 1000,
+        "wires": [
+            [
+                "32161134.dcc21e"
+            ]
+        ]
+    },
+    {
+        "id": "622b31d1.184de",
+        "type": "switch",
+        "z": "abc13765.990d38",
+        "name": "",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "btwn",
+                "v": "0",
+                "vt": "num",
+                "v2": "10000",
+                "v2t": "num"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 1,
+        "x": 490,
+        "y": 1060,
+        "wires": [
+            [
+                "5d8d378e.6b2eb8"
+            ]
+        ]
+    },
+    {
+        "id": "56258d61.b7acc4",
+        "type": "mqtt-broker",
+        "z": "",
+        "name": "",
+        "broker": "192.168.1.15",
+        "port": "1883",
+        "clientid": "",
+        "usetls": false,
+        "compatmode": true,
+        "keepalive": "60",
+        "cleansession": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthPayload": "",
+        "closeTopic": "",
+        "closeQos": "0",
+        "closePayload": "",
+        "willTopic": "",
+        "willQos": "0",
+        "willPayload": ""
+    },
+    {
+        "id": "7268a3b9.f3b0fc",
+        "type": "server",
+        "z": "",
+        "name": "Home Assistant",
+        "version": 1,
+        "legacy": false,
+        "addon": false,
+        "rejectUnauthorizedCerts": true,
+        "ha_boolean": "y|yes|true|on|home|open",
+        "connectionDelay": true,
+        "cacheJson": true
+    }
+]

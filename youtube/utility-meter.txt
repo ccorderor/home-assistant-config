@@ -1,0 +1,96 @@
+Ejemplo de integration:
+
+- platform: integration
+  source: sensor.iotawatt_consumototal
+  name: consumo_total_casa_kwh
+  unit_prefix: k
+  round: 2
+
+(podéis utilizar la configuración con method: left en el caso de un consumo on/off)
+
+
+Ejemplo de utility meter:
+
+daily_energy:
+  source: sensor.consumo_total_casa_kwh
+  cycle: daily
+  tariffs:
+    - valle
+    - llano
+    - punta
+weekly_energy:
+  source: sensor.consumo_total_casa_kwh
+  cycle: weekly
+  tariffs:
+    - valle
+    - llano
+    - punta
+monthly_energy:
+  source: sensor.consumo_total_casa_kwh
+  cycle: monthly
+  tariffs:
+    - valle
+    - llano
+    - punta
+    
+Ejemplo de automatización:
+
+- alias: Cambio tarifa luz valle
+  trigger:
+  - platform: time
+    at: '00:00:00'
+  action:
+  - service: utility_meter.select_tariff
+    data:
+      entity_id: utility_meter.daily_energy
+      tariff: valle
+
+- alias: Cambio tarifa luz llano
+  trigger:
+  - platform: time
+    at: '08:00:00'
+  - platform: time
+    at: '14:00:00'
+  - platform: time
+    at: '22:00:00'
+  condition:
+  - condition: time
+    weekday:
+      - mon
+      - tue
+      - wed
+      - thu
+      - fri
+  - condition: state
+    entity_id: binary_sensor.workday_sensor
+    state: "on"
+  action:
+  - service: utility_meter.select_tariff
+    data:
+      entity_id: utility_meter.daily_energy
+      tariff: llano
+  
+
+- alias: Cambio tarifa luz punta
+  trigger:
+  - platform: time
+    at: '10:00:00'
+  - platform: time
+    at: '18:00:00'
+  condition:
+  - condition: time
+    weekday:
+      - mon
+      - tue
+      - wed
+      - thu
+      - fri
+  - condition: state
+    entity_id: binary_sensor.workday_sensor
+    state: "on"
+  action:
+  - service: utility_meter.select_tariff
+    data:
+      entity_id: utility_meter.daily_energy
+      tariff: punta
+  

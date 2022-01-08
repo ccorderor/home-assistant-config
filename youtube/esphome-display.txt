@@ -1,0 +1,139 @@
+esphome:
+  name: solar-display
+  platform: ESP32
+  board: nodemcu-32s
+
+# Enable logging
+logger:
+
+# Enable Home Assistant API
+api:
+
+ota:
+  password: "XXXXXXXXXXXXXXXX"
+
+wifi:
+  ssid: !secret wifi_ap
+  password: !secret wifi_password
+
+  # Enable fallback hotspot (captive portal) in case wifi connection fails
+  ap:
+    ssid: "Solar-Display Fallback Hotspot"
+    password: "XXXXXXXXXX"
+
+captive_portal:
+
+
+font:
+  - file: 'arial.ttf'
+    id: font13
+    size: 13
+    
+  - file: 'arial.ttf'
+    id: font15
+    size: 15
+    
+  - file: 'arial.ttf'
+    id: font17
+    size: 17
+    
+  - file: 'arial.ttf'
+    id: font10
+    size: 10
+    
+  - file: 'materialdesignicons-webfont.ttf'
+    id: icon_font_35
+    size: 35
+    glyphs: [
+      # Weather
+      "󰖙", # mdi-weather-sunny
+      "󰄬", # OK
+      "󰅖" # KO
+      ]
+      
+image:
+  - file: "loco.jpg"
+    id: my_image
+    resize: 48x48
+    
+switch:
+  - platform: gpio
+    pin: GPIO12
+    name: "Nokia screen backlight"
+
+sensor:
+  - platform: homeassistant
+    id: energy_next_hour
+    entity_id: sensor.energy_next_hour
+    internal: true
+    
+  - platform: homeassistant
+    id: iotawatt_acometida
+    entity_id: sensor.iotawatt_acometida
+    internal: true
+    
+  - platform: homeassistant
+    id: compensacion_horaria_fv
+    entity_id: sensor.compensacion_horaria_fv
+    internal: true
+
+# Example configuration entry
+spi:
+  clk_pin: GPIO27
+  mosi_pin: GPIO26
+
+display:
+  - platform: pcd8544
+    id: my_display
+    reset_pin: GPIO33
+    cs_pin: GPIO14
+    dc_pin: GPIO25
+    contrast: 0x7f
+    pages:
+      - id: page1
+        lambda: |-
+          it.image(20, 0, id(my_image));
+      - id: page2
+        lambda: |-
+          it.print(0, 0, id(font13), "UN");
+          it.print(0, 12, id(font13), "LOCO");
+          it.print(0, 24, id(font13), "Y SU");
+          it.print(0, 36, id(font13), "TECNOLOGIA");
+      - id: page3
+        lambda: |-
+          it.print(0, 0, id(font10), "PRODUCCION FV");
+          it.print(0, 10, id(font10), "PROXIMA HORA");
+          if (id(energy_next_hour).has_state()) {
+            it.printf(0, 30, id(font17), "%.2f kWh", id(energy_next_hour).state);
+          }
+      - id: page4
+        lambda: |-
+          it.print(0, 0, id(font13), "USO GRID");
+          if (id(iotawatt_acometida).has_state()) {
+            it.printf(0, 25, id(font17), "%.0f W", id(iotawatt_acometida).state);
+          }
+      - id: page5
+        lambda: |-
+          it.print(0, 0, id(font13), "LAVADORA");
+          if (id(iotawatt_acometida).has_state()) {
+            if (id(iotawatt_acometida).state < -1000) {
+              it.printf(25, 20, id(icon_font_35), "󰄬");
+            }
+            else {
+              it.printf(25, 20, id(icon_font_35), "󰅖");
+            }
+          }
+      - id: page6
+        lambda: |-
+          it.print(0, 0, id(font10), "BALANCE NETO");
+          if (id(compensacion_horaria_fv).has_state()) {
+            it.printf(0, 25, id(font17), "%.2f kWh", id(compensacion_horaria_fv).state);
+          }
+      
+interval:
+  - interval: 3s
+    then:
+      - display.page.show_next: my_display
+      - component.update: my_display      
+      
+

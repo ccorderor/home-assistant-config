@@ -1,0 +1,130 @@
+esphome:
+  name: fingerprint-test1
+
+esp8266:
+  board: nodemcuv2
+
+# Example configuration entry
+logger:
+  level: DEBUG
+
+# Enable Home Assistant API
+api:
+  services:
+  
+    # Fingerprint services
+    - service: fingerprint_enroll
+      variables:
+        finger_id: int
+        num_scans: int
+      then:
+        - fingerprint_grow.enroll:
+            finger_id: !lambda 'return finger_id;'
+            num_scans: !lambda 'return num_scans;'
+    - service: fingerprint_cancel_enroll
+      then:
+        - fingerprint_grow.cancel_enroll:
+    - service: fingerprin_delete
+      variables:
+        finger_id: int
+      then:
+        - fingerprint_grow.delete:
+            finger_id: !lambda 'return finger_id;'
+    - service: fingerprint_delete_all
+      then:
+        - fingerprint_grow.delete_all:
+
+web_server:
+  port: 80
+
+ota:
+  password: "XXXXXXXXXX"
+
+wifi:
+  ssid: !secret wifi_ssid
+  password: !secret wifi_password
+
+  # Enable fallback hotspot (captive portal) in case wifi connection fails
+  ap:
+    ssid: "Fingerprint-Test1"
+    password: "XXXXXXXXXXX"
+
+captive_portal:
+
+
+# Example configuration entry
+uart:
+  rx_pin: D1
+  tx_pin: D2
+  baud_rate: 57600
+
+# Declare Grow Fingerprint Reader
+fingerprint_grow:
+  #sensing_pin: D7 #GPIO13
+  on_finger_scan_matched:
+    - text_sensor.template.publish:
+        id: fingerprint_state
+        state: "Authorized finger"
+    - homeassistant.event:
+        event: esphome.test_node_finger_scan_matched
+        data:
+          finger_id: !lambda 'return finger_id;'
+          confidence: !lambda 'return confidence;'
+  on_finger_scan_unmatched:
+    - text_sensor.template.publish:
+        id: fingerprint_state
+        state: "Unauthorized finger"
+    - homeassistant.event:
+        event: esphome.test_node_finger_scan_unmatched
+  on_enrollment_scan:
+    - text_sensor.template.publish:
+        id: fingerprint_state
+        state: "Finger scanned"
+    - homeassistant.event:
+        event: esphome.test_node_enrollment_scan
+        data:
+          finger_id: !lambda 'return finger_id;'
+          scan_num: !lambda 'return scan_num;'
+  on_enrollment_done:
+    - text_sensor.template.publish:
+        id: fingerprint_state
+        state: "Enrolled fingerprint"
+    - homeassistant.event:
+        event: esphome.test_node_enrollment_done
+  on_enrollment_failed:
+    - text_sensor.template.publish:
+        id: fingerprint_state
+        state: "Failed to enroll fingerprint"
+    - homeassistant.event:
+        event: esphome.test_node_enrollment_failed
+        data:
+          finger_id: !lambda 'return finger_id;'
+
+# Optional template text sensor for visual feedback
+text_sensor:
+  - platform: template
+    id: fingerprint_state
+    name: "Fingerprint State"
+
+
+
+# Optional sensors
+binary_sensor:
+  - platform: fingerprint_grow
+    id: fingerprint_enrolling
+    name: "Fingerprint Enrolling"
+
+sensor:
+  - platform: fingerprint_grow
+    fingerprint_count:
+      name: "Fingerprint Count"
+    last_finger_id:
+      name: "Fingerprint Last Finger ID"
+    last_confidence:
+      name: "Fingerprint Last Confidence"
+    status:
+      name: "Fingerprint Status"
+    capacity:
+      name: "Fingerprint Capacity"
+    security_level:
+      name: "Fingerprint Security Level"

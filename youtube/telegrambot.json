@@ -1,0 +1,609 @@
+[
+    {
+        "id": "5662b04730191aee",
+        "type": "telegram command",
+        "z": "9f1c0df4be8153db",
+        "name": "Comando de Prueba",
+        "command": "/prueba",
+        "description": "Comando de Prueba",
+        "registercommand": true,
+        "language": "",
+        "scope": "default",
+        "bot": "fddca8d8e1dd4259",
+        "strict": false,
+        "hasresponse": true,
+        "useregex": false,
+        "removeregexcommand": false,
+        "outputs": 2,
+        "x": 190,
+        "y": 200,
+        "wires": [
+            [
+                "39aa3fc1ba9a1d51",
+                "05f84f69aafbf212"
+            ],
+            []
+        ]
+    },
+    {
+        "id": "39aa3fc1ba9a1d51",
+        "type": "debug",
+        "z": "9f1c0df4be8153db",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 530,
+        "y": 200,
+        "wires": []
+    },
+    {
+        "id": "c2d600da1ca15420",
+        "type": "telegram sender",
+        "z": "9f1c0df4be8153db",
+        "name": "",
+        "bot": "fddca8d8e1dd4259",
+        "haserroroutput": false,
+        "outputs": 1,
+        "x": 690,
+        "y": 300,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "05f84f69aafbf212",
+        "type": "function",
+        "z": "9f1c0df4be8153db",
+        "name": "",
+        "func": "msg.payload = {}\nmsg.payload.type = \"message\"\nmsg.payload.chatId = \"11311214\"\nmsg.payload.content = \"respuesta a tu mensaje\"\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 460,
+        "y": 300,
+        "wires": [
+            [
+                "c2d600da1ca15420"
+            ]
+        ]
+    },
+    {
+        "id": "ca9d05b878ce63ae",
+        "type": "telegram command",
+        "z": "9f1c0df4be8153db",
+        "name": "Apaga Luz",
+        "command": "/luz",
+        "description": "Comando Apaga Luz",
+        "registercommand": true,
+        "language": "",
+        "scope": "default",
+        "bot": "fddca8d8e1dd4259",
+        "strict": false,
+        "hasresponse": true,
+        "useregex": false,
+        "removeregexcommand": false,
+        "outputs": 2,
+        "x": 180,
+        "y": 480,
+        "wires": [
+            [
+                "b438c521cc0d7784"
+            ],
+            []
+        ]
+    },
+    {
+        "id": "b438c521cc0d7784",
+        "type": "switch",
+        "z": "9f1c0df4be8153db",
+        "name": "",
+        "property": "payload.content",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": " on",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": " off",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 430,
+        "y": 480,
+        "wires": [
+            [
+                "b3fade4e4c03fc34"
+            ],
+            [
+                "f3d1e525ce4a71b4"
+            ]
+        ]
+    },
+    {
+        "id": "b3fade4e4c03fc34",
+        "type": "api-call-service",
+        "z": "9f1c0df4be8153db",
+        "name": "",
+        "server": "7268a3b9.f3b0fc",
+        "version": 3,
+        "debugenabled": false,
+        "service_domain": "light",
+        "service": "turn_on",
+        "entityId": "light.buhardilla_flexoizquierda",
+        "data": "",
+        "dataType": "jsonata",
+        "mergecontext": "",
+        "mustacheAltTags": false,
+        "outputProperties": [],
+        "queue": "none",
+        "x": 730,
+        "y": 460,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "f3d1e525ce4a71b4",
+        "type": "api-call-service",
+        "z": "9f1c0df4be8153db",
+        "name": "",
+        "server": "7268a3b9.f3b0fc",
+        "version": 3,
+        "debugenabled": false,
+        "service_domain": "light",
+        "service": "turn_off",
+        "entityId": "light.buhardilla_flexoizquierda",
+        "data": "",
+        "dataType": "jsonata",
+        "mergecontext": "",
+        "mustacheAltTags": false,
+        "outputProperties": [],
+        "queue": "none",
+        "x": 730,
+        "y": 520,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "d5ec3494aef73ae1",
+        "type": "telegram command",
+        "z": "9f1c0df4be8153db",
+        "name": "",
+        "command": "/camera",
+        "description": "Camera Snapshot",
+        "registercommand": true,
+        "language": "",
+        "scope": "default",
+        "bot": "fddca8d8e1dd4259",
+        "strict": false,
+        "hasresponse": true,
+        "useregex": false,
+        "removeregexcommand": false,
+        "outputs": 2,
+        "x": 140,
+        "y": 640,
+        "wires": [
+            [
+                "14fcd404961370bc"
+            ],
+            []
+        ]
+    },
+    {
+        "id": "374ba0be83b973f6",
+        "type": "api-call-service",
+        "z": "9f1c0df4be8153db",
+        "name": "snapshot",
+        "server": "7268a3b9.f3b0fc",
+        "version": 3,
+        "debugenabled": false,
+        "service_domain": "camera",
+        "service": "snapshot",
+        "entityId": "camera.front_1",
+        "data": "{\"filename\":\"www/snapshot_delantera.jpg\"}",
+        "dataType": "json",
+        "mergecontext": "",
+        "mustacheAltTags": false,
+        "outputProperties": [],
+        "queue": "none",
+        "x": 520,
+        "y": 840,
+        "wires": [
+            [
+                "5df3a0ef93c32c16"
+            ]
+        ]
+    },
+    {
+        "id": "5df3a0ef93c32c16",
+        "type": "http request",
+        "z": "9f1c0df4be8153db",
+        "name": "",
+        "method": "GET",
+        "ret": "bin",
+        "paytoqs": "ignore",
+        "url": "http://192.168.1.15:8123/local/snapshot_delantera.jpg",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "authType": "",
+        "senderr": false,
+        "x": 770,
+        "y": 840,
+        "wires": [
+            [
+                "41655c69bd840ff8"
+            ]
+        ]
+    },
+    {
+        "id": "41655c69bd840ff8",
+        "type": "function",
+        "z": "9f1c0df4be8153db",
+        "name": "",
+        "func": "var image = msg.payload\n\nmsg.payload = {}\nmsg.payload.type = \"photo\"\nmsg.payload.chatId = \"11311214\"\nmsg.payload.content = image\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 980,
+        "y": 840,
+        "wires": [
+            [
+                "cabaaf3f45268d28"
+            ]
+        ]
+    },
+    {
+        "id": "270f626fdfabf9c7",
+        "type": "telegram sender",
+        "z": "9f1c0df4be8153db",
+        "name": "",
+        "bot": "fddca8d8e1dd4259",
+        "haserroroutput": false,
+        "outputs": 1,
+        "x": 690,
+        "y": 740,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "14fcd404961370bc",
+        "type": "function",
+        "z": "9f1c0df4be8153db",
+        "name": "Format Telegram Msg",
+        "func": "var opts = {\n  reply_markup: JSON.stringify({\n    \"inline_keyboard\": [[\n                {\n                    \"text\": \"CAM ENTRADA\",\n                    \"callback_data\": \"CAM_ENTRADA\"            \n                },\n                {\n                    \"text\": \"CAM SALON\",\n                    \"callback_data\": \"CAM_SALON\"            \n                }]\n            ]\n  })\n};\n\nmsg.payload = {}\n\nmsg.payload.options = opts;\nmsg.payload.content = \"Selecciona la cámara\";\nmsg.payload.type = \"message\";\nmsg.payload.chatId = '11311214'\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 380,
+        "y": 740,
+        "wires": [
+            [
+                "270f626fdfabf9c7"
+            ]
+        ]
+    },
+    {
+        "id": "51e2267b9010a823",
+        "type": "telegram event",
+        "z": "9f1c0df4be8153db",
+        "name": "",
+        "bot": "fddca8d8e1dd4259",
+        "event": "callback_query",
+        "autoanswer": false,
+        "x": 160,
+        "y": 840,
+        "wires": [
+            [
+                "57fdba253bf2fead"
+            ]
+        ]
+    },
+    {
+        "id": "57fdba253bf2fead",
+        "type": "switch",
+        "z": "9f1c0df4be8153db",
+        "name": "",
+        "property": "payload.content",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "CAM_ENTRADA",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "CAM_SALON",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 350,
+        "y": 840,
+        "wires": [
+            [
+                "374ba0be83b973f6"
+            ],
+            [
+                "e3a93730a784adad"
+            ]
+        ]
+    },
+    {
+        "id": "e3a93730a784adad",
+        "type": "api-call-service",
+        "z": "9f1c0df4be8153db",
+        "name": "snapshot",
+        "server": "7268a3b9.f3b0fc",
+        "version": 3,
+        "debugenabled": false,
+        "service_domain": "camera",
+        "service": "snapshot",
+        "entityId": "camera.salon",
+        "data": "{\"filename\":\"www/snapshot_salon.jpg\"}",
+        "dataType": "json",
+        "mergecontext": "",
+        "mustacheAltTags": false,
+        "outputProperties": [],
+        "queue": "none",
+        "x": 520,
+        "y": 920,
+        "wires": [
+            [
+                "9a857230297cd430"
+            ]
+        ]
+    },
+    {
+        "id": "9a857230297cd430",
+        "type": "http request",
+        "z": "9f1c0df4be8153db",
+        "name": "",
+        "method": "GET",
+        "ret": "bin",
+        "paytoqs": "ignore",
+        "url": "http://192.168.1.15:8123/local/snapshot_salon.jpg",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "authType": "",
+        "senderr": false,
+        "x": 770,
+        "y": 920,
+        "wires": [
+            [
+                "41655c69bd840ff8"
+            ]
+        ]
+    },
+    {
+        "id": "cabaaf3f45268d28",
+        "type": "telegram sender",
+        "z": "9f1c0df4be8153db",
+        "name": "",
+        "bot": "fddca8d8e1dd4259",
+        "haserroroutput": false,
+        "outputs": 1,
+        "x": 1130,
+        "y": 900,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "9b8892630842681e",
+        "type": "telegram command",
+        "z": "9f1c0df4be8153db",
+        "name": "",
+        "command": "/acometida",
+        "description": "Watts Acometida",
+        "registercommand": true,
+        "language": "",
+        "scope": "default",
+        "bot": "fddca8d8e1dd4259",
+        "strict": false,
+        "hasresponse": true,
+        "useregex": false,
+        "removeregexcommand": false,
+        "outputs": 2,
+        "x": 140,
+        "y": 1060,
+        "wires": [
+            [
+                "dacf885773564a7e"
+            ],
+            []
+        ]
+    },
+    {
+        "id": "dacf885773564a7e",
+        "type": "api-current-state",
+        "z": "9f1c0df4be8153db",
+        "name": "",
+        "server": "7268a3b9.f3b0fc",
+        "version": 2,
+        "outputs": 1,
+        "halt_if": "",
+        "halt_if_type": "str",
+        "halt_if_compare": "is",
+        "entity_id": "sensor.iotawatt_acometida",
+        "state_type": "str",
+        "blockInputOverrides": false,
+        "outputProperties": [
+            {
+                "property": "valor",
+                "propertyType": "msg",
+                "value": "",
+                "valueType": "entityState"
+            },
+            {
+                "property": "data",
+                "propertyType": "msg",
+                "value": "",
+                "valueType": "entity"
+            }
+        ],
+        "override_topic": false,
+        "state_location": "payload",
+        "override_payload": "msg",
+        "entity_location": "data",
+        "override_data": "msg",
+        "x": 460,
+        "y": 1060,
+        "wires": [
+            [
+                "56da50b255b66645"
+            ]
+        ]
+    },
+    {
+        "id": "56da50b255b66645",
+        "type": "function",
+        "z": "9f1c0df4be8153db",
+        "name": "",
+        "func": "msg.payload = {}\nmsg.payload.type = \"message\"\nmsg.payload.chatId = \"11311214\"\nmsg.payload.content = \"Los watts de la acometida son: \"+msg.valor\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 800,
+        "y": 1060,
+        "wires": [
+            [
+                "cabaaf3f45268d28"
+            ]
+        ]
+    },
+    {
+        "id": "16d90bd12498c9dd",
+        "type": "telegram command",
+        "z": "9f1c0df4be8153db",
+        "name": "",
+        "command": "/consumos",
+        "description": "Consumos",
+        "registercommand": true,
+        "language": "",
+        "scope": "default",
+        "bot": "fddca8d8e1dd4259",
+        "strict": false,
+        "hasresponse": true,
+        "useregex": false,
+        "removeregexcommand": false,
+        "outputs": 2,
+        "x": 140,
+        "y": 1180,
+        "wires": [
+            [
+                "2926d5ef077bf9d3"
+            ],
+            []
+        ]
+    },
+    {
+        "id": "2926d5ef077bf9d3",
+        "type": "ha-get-entities",
+        "z": "9f1c0df4be8153db",
+        "name": "",
+        "server": "7268a3b9.f3b0fc",
+        "version": 0,
+        "rules": [
+            {
+                "property": "entity_id",
+                "logic": "starts_with",
+                "value": "sensor.iotawatt_",
+                "valueType": "str"
+            }
+        ],
+        "output_type": "array",
+        "output_empty_results": false,
+        "output_location_type": "msg",
+        "output_location": "payload",
+        "output_results_count": 1,
+        "x": 390,
+        "y": 1180,
+        "wires": [
+            [
+                "f1e661a857e2969e"
+            ]
+        ]
+    },
+    {
+        "id": "f1e661a857e2969e",
+        "type": "function",
+        "z": "9f1c0df4be8153db",
+        "name": "Format Telegram Msg",
+        "func": "var contenido = \"\";\nmsg.payload.forEach(element => {\n    contenido = contenido + \"Sensor: \"+element.entity_id+\" - \"+element.state+\"\\n\";\n});\n\n\nmsg.payload.content = contenido;\nmsg.payload.chatId = '11311214'\nmsg.payload.type = \"message\"\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 720,
+        "y": 1180,
+        "wires": [
+            [
+                "cabaaf3f45268d28"
+            ]
+        ]
+    },
+    {
+        "id": "fddca8d8e1dd4259",
+        "type": "telegram bot",
+        "botname": "PruebaLocoysuTecnologia",
+        "usernames": "",
+        "chatids": "",
+        "baseapiurl": "",
+        "updatemode": "polling",
+        "pollinterval": "300",
+        "usesocks": false,
+        "sockshost": "",
+        "socksport": "6667",
+        "socksusername": "anonymous",
+        "sockspassword": "",
+        "bothost": "",
+        "botpath": "",
+        "localbotport": "8443",
+        "publicbotport": "8443",
+        "privatekey": "",
+        "certificate": "",
+        "useselfsignedcertificate": false,
+        "sslterminated": false,
+        "verboselogging": false
+    },
+    {
+        "id": "7268a3b9.f3b0fc",
+        "type": "server",
+        "name": "Home Assistant",
+        "version": 1,
+        "legacy": false,
+        "addon": false,
+        "rejectUnauthorizedCerts": true,
+        "ha_boolean": "y|yes|true|on|home|open",
+        "connectionDelay": true,
+        "cacheJson": true
+    }
+]

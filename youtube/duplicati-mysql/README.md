@@ -58,3 +58,5 @@ Tenéis que copiar este script en algún lugar de vuestro servidor, y añadir un
 ```
 15 20 * * * /srv/docker/backup_db/mariadb_backup.sh
 ```
+
+Finalmente, en duplicati, configurad una nueva task para hacer backups de los ficheros contenidos en la carpeta "backupfolder". Ready :)

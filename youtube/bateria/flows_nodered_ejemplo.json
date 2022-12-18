@@ -1,0 +1,1377 @@
+[
+    {
+        "id": "8081c629994bf3a6",
+        "type": "modbus-read",
+        "z": "abc13765.990d38",
+        "name": "37000",
+        "topic": "37000",
+        "showStatusActivities": false,
+        "logIOActivities": false,
+        "showErrors": true,
+        "unitid": "1",
+        "dataType": "HoldingRegister",
+        "adr": "37000",
+        "quantity": "20",
+        "rate": "3",
+        "rateUnit": "s",
+        "delayOnStart": false,
+        "startDelayTime": "",
+        "server": "26d6b97598760778",
+        "useIOFile": false,
+        "ioFile": "",
+        "useIOForPayload": false,
+        "emptyMsgOnFail": false,
+        "x": 230,
+        "y": 3160,
+        "wires": [
+            [
+                "60a48d53c1ffef41"
+            ],
+            []
+        ]
+    },
+    {
+        "id": "60a48d53c1ffef41",
+        "type": "buffer-parser",
+        "z": "abc13765.990d38",
+        "name": "buffer",
+        "data": "responseBuffer.buffer",
+        "dataType": "msg",
+        "specification": "spec",
+        "specificationType": "ui",
+        "items": [
+            {
+                "type": "uint16be",
+                "name": "bat_status",
+                "offset": 0,
+                "length": 1,
+                "offsetbit": 0,
+                "scale": "1",
+                "mask": ""
+            },
+            {
+                "type": "int32be",
+                "name": "bat_power",
+                "offset": 2,
+                "length": 1,
+                "offsetbit": 0,
+                "scale": "1",
+                "mask": ""
+            },
+            {
+                "type": "uint16be",
+                "name": "bat_bus_volt",
+                "offset": 6,
+                "length": 1,
+                "offsetbit": 0,
+                "scale": "/10",
+                "mask": ""
+            },
+            {
+                "type": "uint16be",
+                "name": "bat_soc",
+                "offset": 8,
+                "length": 1,
+                "offsetbit": 0,
+                "scale": "/10",
+                "mask": ""
+            },
+            {
+                "type": "uint16be",
+                "name": "bat_workingmode",
+                "offset": 12,
+                "length": 1,
+                "offsetbit": 0,
+                "scale": "1",
+                "mask": ""
+            },
+            {
+                "type": "uint32be",
+                "name": "bat_ratedchargepower",
+                "offset": 14,
+                "length": 1,
+                "offsetbit": 0,
+                "scale": "1",
+                "mask": ""
+            },
+            {
+                "type": "uint32be",
+                "name": "bat_rateddischargepower",
+                "offset": 18,
+                "length": 1,
+                "offsetbit": 0,
+                "scale": "1",
+                "mask": ""
+            },
+            {
+                "type": "uint32be",
+                "name": "current_day_charge_capacity",
+                "offset": 30,
+                "length": 1,
+                "offsetbit": 0,
+                "scale": "/100",
+                "mask": ""
+            },
+            {
+                "type": "uint32be",
+                "name": "current_day_discharge_capacity",
+                "offset": 34,
+                "length": 1,
+                "offsetbit": 0,
+                "scale": "/100",
+                "mask": ""
+            }
+        ],
+        "swap1": "",
+        "swap2": "",
+        "swap3": "",
+        "swap1Type": "swap",
+        "swap2Type": "swap",
+        "swap3Type": "swap",
+        "msgProperty": "payload",
+        "msgPropertyType": "str",
+        "resultType": "keyvalue",
+        "resultTypeType": "return",
+        "multipleResult": false,
+        "fanOutMultipleResult": false,
+        "setTopic": true,
+        "outputs": 1,
+        "x": 570,
+        "y": 3280,
+        "wires": [
+            [
+                "a049f954df9dda21",
+                "46dc1b436fe6e3fc",
+                "a9d03deb265f462c"
+            ]
+        ]
+    },
+    {
+        "id": "a049f954df9dda21",
+        "type": "debug",
+        "z": "abc13765.990d38",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 870,
+        "y": 3280,
+        "wires": []
+    },
+    {
+        "id": "814d1541bafcdade",
+        "type": "comment",
+        "z": "abc13765.990d38",
+        "name": "Bateria",
+        "info": "",
+        "x": 210,
+        "y": 3080,
+        "wires": []
+    },
+    {
+        "id": "886ec3d8b46c8be9",
+        "type": "modbus-read",
+        "z": "abc13765.990d38",
+        "name": "37020",
+        "topic": "37020",
+        "showStatusActivities": false,
+        "logIOActivities": false,
+        "showErrors": true,
+        "unitid": "1",
+        "dataType": "HoldingRegister",
+        "adr": "37020",
+        "quantity": "20",
+        "rate": "1",
+        "rateUnit": "m",
+        "delayOnStart": false,
+        "startDelayTime": "",
+        "server": "26d6b97598760778",
+        "useIOFile": false,
+        "ioFile": "",
+        "useIOForPayload": false,
+        "emptyMsgOnFail": false,
+        "x": 230,
+        "y": 3400,
+        "wires": [
+            [
+                "ac4814090474bceb"
+            ],
+            []
+        ]
+    },
+    {
+        "id": "ac4814090474bceb",
+        "type": "buffer-parser",
+        "z": "abc13765.990d38",
+        "name": "buffer",
+        "data": "responseBuffer.buffer",
+        "dataType": "msg",
+        "specification": "spec",
+        "specificationType": "ui",
+        "items": [
+            {
+                "type": "int16be",
+                "name": "bat_buscurrent",
+                "offset": 2,
+                "length": 1,
+                "offsetbit": 0,
+                "scale": "/10",
+                "mask": ""
+            },
+            {
+                "type": "int16be",
+                "name": "bat_temperature",
+                "offset": 4,
+                "length": 1,
+                "offsetbit": 0,
+                "scale": "/10",
+                "mask": ""
+            },
+            {
+                "type": "uint16be",
+                "name": "remaining_time",
+                "offset": 10,
+                "length": 1,
+                "offsetbit": 0,
+                "scale": "1",
+                "mask": ""
+            }
+        ],
+        "swap1": "",
+        "swap2": "",
+        "swap3": "",
+        "swap1Type": "swap",
+        "swap2Type": "swap",
+        "swap3Type": "swap",
+        "msgProperty": "payload",
+        "msgPropertyType": "str",
+        "resultType": "keyvalue",
+        "resultTypeType": "return",
+        "multipleResult": false,
+        "fanOutMultipleResult": false,
+        "setTopic": true,
+        "outputs": 1,
+        "x": 570,
+        "y": 3520,
+        "wires": [
+            [
+                "96e06319d31ac6d5",
+                "10690858aa662c5f"
+            ]
+        ]
+    },
+    {
+        "id": "96e06319d31ac6d5",
+        "type": "debug",
+        "z": "abc13765.990d38",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 870,
+        "y": 3520,
+        "wires": []
+    },
+    {
+        "id": "46dc1b436fe6e3fc",
+        "type": "change",
+        "z": "abc13765.990d38",
+        "name": "bat_soc",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload.bat_soc",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 640,
+        "y": 3360,
+        "wires": [
+            [
+                "ad9d13a3fc54fc44"
+            ]
+        ]
+    },
+    {
+        "id": "a84dc84a6982ad86",
+        "type": "ha-entity",
+        "z": "abc13765.990d38",
+        "name": "bat_soc",
+        "server": "7268a3b9.f3b0fc",
+        "version": 2,
+        "debugenabled": false,
+        "outputs": 1,
+        "entityType": "sensor",
+        "config": [
+            {
+                "property": "name",
+                "value": "bat_soc"
+            },
+            {
+                "property": "device_class",
+                "value": "battery"
+            },
+            {
+                "property": "icon",
+                "value": ""
+            },
+            {
+                "property": "unit_of_measurement",
+                "value": "%"
+            },
+            {
+                "property": "state_class",
+                "value": ""
+            },
+            {
+                "property": "last_reset",
+                "value": ""
+            }
+        ],
+        "state": "payload",
+        "stateType": "msg",
+        "attributes": [],
+        "resend": true,
+        "outputLocation": "",
+        "outputLocationType": "none",
+        "inputOverride": "allow",
+        "outputOnStateChange": false,
+        "outputPayload": "$entity().state ? \"on\": \"off\"",
+        "outputPayloadType": "jsonata",
+        "x": 1060,
+        "y": 3360,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "ad9d13a3fc54fc44",
+        "type": "switch",
+        "z": "abc13765.990d38",
+        "name": "",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "btwn",
+                "v": "0",
+                "vt": "num",
+                "v2": "100",
+                "v2t": "num"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 1,
+        "x": 850,
+        "y": 3360,
+        "wires": [
+            [
+                "a84dc84a6982ad86"
+            ]
+        ]
+    },
+    {
+        "id": "10690858aa662c5f",
+        "type": "change",
+        "z": "abc13765.990d38",
+        "name": "bat_temperature",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload.bat_temperature",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 620,
+        "y": 3580,
+        "wires": [
+            [
+                "68bf20ae52c88bc7"
+            ]
+        ]
+    },
+    {
+        "id": "8d642f1d1d142fa6",
+        "type": "ha-entity",
+        "z": "abc13765.990d38",
+        "name": "bat_temperature",
+        "server": "7268a3b9.f3b0fc",
+        "version": 2,
+        "debugenabled": false,
+        "outputs": 1,
+        "entityType": "sensor",
+        "config": [
+            {
+                "property": "name",
+                "value": "bat_temperature"
+            },
+            {
+                "property": "device_class",
+                "value": "temperature"
+            },
+            {
+                "property": "icon",
+                "value": ""
+            },
+            {
+                "property": "unit_of_measurement",
+                "value": ""
+            },
+            {
+                "property": "state_class",
+                "value": ""
+            },
+            {
+                "property": "last_reset",
+                "value": ""
+            }
+        ],
+        "state": "payload",
+        "stateType": "msg",
+        "attributes": [],
+        "resend": true,
+        "outputLocation": "",
+        "outputLocationType": "none",
+        "inputOverride": "allow",
+        "outputOnStateChange": false,
+        "outputPayload": "$entity().state ? \"on\": \"off\"",
+        "outputPayloadType": "jsonata",
+        "x": 1040,
+        "y": 3580,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "68bf20ae52c88bc7",
+        "type": "switch",
+        "z": "abc13765.990d38",
+        "name": "",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "btwn",
+                "v": "0",
+                "vt": "num",
+                "v2": "100",
+                "v2t": "num"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 1,
+        "x": 810,
+        "y": 3580,
+        "wires": [
+            [
+                "8d642f1d1d142fa6"
+            ]
+        ]
+    },
+    {
+        "id": "a9d03deb265f462c",
+        "type": "change",
+        "z": "abc13765.990d38",
+        "name": "bat_power",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload.bat_power",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 650,
+        "y": 3420,
+        "wires": [
+            [
+                "d0520a59175ef073"
+            ]
+        ]
+    },
+    {
+        "id": "79cbdc376dcc3ef5",
+        "type": "ha-entity",
+        "z": "abc13765.990d38",
+        "name": "bat_power",
+        "server": "7268a3b9.f3b0fc",
+        "version": 2,
+        "debugenabled": false,
+        "outputs": 1,
+        "entityType": "sensor",
+        "config": [
+            {
+                "property": "name",
+                "value": "bat_power"
+            },
+            {
+                "property": "device_class",
+                "value": "power"
+            },
+            {
+                "property": "icon",
+                "value": ""
+            },
+            {
+                "property": "unit_of_measurement",
+                "value": "W"
+            },
+            {
+                "property": "state_class",
+                "value": ""
+            },
+            {
+                "property": "last_reset",
+                "value": ""
+            }
+        ],
+        "state": "payload",
+        "stateType": "msg",
+        "attributes": [],
+        "resend": true,
+        "outputLocation": "",
+        "outputLocationType": "none",
+        "inputOverride": "allow",
+        "outputOnStateChange": false,
+        "outputPayload": "$entity().state ? \"on\": \"off\"",
+        "outputPayloadType": "jsonata",
+        "x": 1070,
+        "y": 3420,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "d0520a59175ef073",
+        "type": "switch",
+        "z": "abc13765.990d38",
+        "name": "",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "btwn",
+                "v": "-10000",
+                "vt": "num",
+                "v2": "10000",
+                "v2t": "num"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 1,
+        "x": 850,
+        "y": 3420,
+        "wires": [
+            [
+                "79cbdc376dcc3ef5"
+            ]
+        ]
+    },
+    {
+        "id": "c26b0b8f251a7269",
+        "type": "modbus-read",
+        "z": "abc13765.990d38",
+        "name": "47255",
+        "topic": "47255",
+        "showStatusActivities": false,
+        "logIOActivities": false,
+        "showErrors": true,
+        "unitid": "1",
+        "dataType": "HoldingRegister",
+        "adr": "47255",
+        "quantity": "50",
+        "rate": "99",
+        "rateUnit": "h",
+        "delayOnStart": false,
+        "startDelayTime": "",
+        "server": "26d6b97598760778",
+        "useIOFile": false,
+        "ioFile": "",
+        "useIOForPayload": false,
+        "emptyMsgOnFail": false,
+        "x": 250,
+        "y": 3760,
+        "wires": [
+            [
+                "046f7589b588bcf2"
+            ],
+            []
+        ]
+    },
+    {
+        "id": "046f7589b588bcf2",
+        "type": "buffer-parser",
+        "z": "abc13765.990d38",
+        "name": "buffer",
+        "data": "responseBuffer.buffer",
+        "dataType": "msg",
+        "specification": "spec",
+        "specificationType": "ui",
+        "items": [
+            {
+                "type": "byte",
+                "name": "tou",
+                "offset": 0,
+                "length": 43,
+                "offsetbit": 0,
+                "scale": "1",
+                "mask": ""
+            }
+        ],
+        "swap1": "",
+        "swap2": "",
+        "swap3": "",
+        "swap1Type": "swap",
+        "swap2Type": "swap",
+        "swap3Type": "swap",
+        "msgProperty": "payload",
+        "msgPropertyType": "str",
+        "resultType": "keyvalue",
+        "resultTypeType": "return",
+        "multipleResult": false,
+        "fanOutMultipleResult": false,
+        "setTopic": true,
+        "outputs": 1,
+        "x": 510,
+        "y": 3780,
+        "wires": [
+            [
+                "5b1fd1233e83eea8"
+            ]
+        ]
+    },
+    {
+        "id": "5b1fd1233e83eea8",
+        "type": "debug",
+        "z": "abc13765.990d38",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 790,
+        "y": 3780,
+        "wires": []
+    },
+    {
+        "id": "4908f5b1fdf4c09a",
+        "type": "comment",
+        "z": "abc13765.990d38",
+        "name": "Pruebas escritura",
+        "info": "",
+        "x": 200,
+        "y": 3920,
+        "wires": []
+    },
+    {
+        "id": "09a3c311593f8c1d",
+        "type": "modbus-read",
+        "z": "abc13765.990d38",
+        "name": "47100",
+        "topic": "47100",
+        "showStatusActivities": false,
+        "logIOActivities": false,
+        "showErrors": true,
+        "unitid": "1",
+        "dataType": "HoldingRegister",
+        "adr": "47100",
+        "quantity": "1",
+        "rate": "99",
+        "rateUnit": "h",
+        "delayOnStart": false,
+        "startDelayTime": "",
+        "server": "26d6b97598760778",
+        "useIOFile": false,
+        "ioFile": "",
+        "useIOForPayload": false,
+        "emptyMsgOnFail": false,
+        "x": 250,
+        "y": 4020,
+        "wires": [
+            [
+                "080413f285efeeee",
+                "f1e26bd75f76551c"
+            ],
+            []
+        ]
+    },
+    {
+        "id": "080413f285efeeee",
+        "type": "buffer-parser",
+        "z": "abc13765.990d38",
+        "name": "buffer",
+        "data": "responseBuffer.buffer",
+        "dataType": "msg",
+        "specification": "spec",
+        "specificationType": "ui",
+        "items": [
+            {
+                "type": "uint16be",
+                "name": "forcible",
+                "offset": 0,
+                "length": 1,
+                "offsetbit": 0,
+                "scale": "1",
+                "mask": ""
+            }
+        ],
+        "swap1": "",
+        "swap2": "",
+        "swap3": "",
+        "swap1Type": "swap",
+        "swap2Type": "swap",
+        "swap3Type": "swap",
+        "msgProperty": "payload",
+        "msgPropertyType": "str",
+        "resultType": "keyvalue",
+        "resultTypeType": "return",
+        "multipleResult": false,
+        "fanOutMultipleResult": false,
+        "setTopic": true,
+        "outputs": 1,
+        "x": 490,
+        "y": 4080,
+        "wires": [
+            [
+                "f1e26bd75f76551c"
+            ]
+        ]
+    },
+    {
+        "id": "f1e26bd75f76551c",
+        "type": "debug",
+        "z": "abc13765.990d38",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 790,
+        "y": 4040,
+        "wires": []
+    },
+    {
+        "id": "02077ae71abbab1f",
+        "type": "buffer-maker",
+        "z": "abc13765.990d38",
+        "name": "",
+        "specification": "spec",
+        "specificationType": "ui",
+        "items": [
+            {
+                "name": "item1",
+                "type": "uint8",
+                "length": 1,
+                "dataType": "msg",
+                "data": "payload"
+            }
+        ],
+        "swap1": "",
+        "swap2": "",
+        "swap3": "",
+        "swap1Type": "swap",
+        "swap2Type": "swap",
+        "swap3Type": "swap",
+        "msgProperty": "payload",
+        "msgPropertyType": "str",
+        "x": 670,
+        "y": 4200,
+        "wires": [
+            [
+                "32737244d3076ce9"
+            ]
+        ]
+    },
+    {
+        "id": "c0176e10d4086b25",
+        "type": "inject",
+        "z": "abc13765.990d38",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": "",
+        "topic": "",
+        "payload": "1",
+        "payloadType": "num",
+        "x": 270,
+        "y": 4140,
+        "wires": [
+            [
+                "f17ba772e7022efd"
+            ]
+        ]
+    },
+    {
+        "id": "32737244d3076ce9",
+        "type": "debug",
+        "z": "abc13765.990d38",
+        "name": "",
+        "active": true,
+        "console": "false",
+        "complete": "false",
+        "x": 990,
+        "y": 4160,
+        "wires": []
+    },
+    {
+        "id": "f17ba772e7022efd",
+        "type": "modbus-write",
+        "z": "abc13765.990d38",
+        "name": "",
+        "showStatusActivities": false,
+        "showErrors": true,
+        "unitid": "1",
+        "dataType": "HoldingRegister",
+        "adr": "47100",
+        "quantity": "1",
+        "server": "26d6b97598760778",
+        "emptyMsgOnFail": false,
+        "keepMsgProperties": false,
+        "x": 760,
+        "y": 4120,
+        "wires": [
+            [
+                "32737244d3076ce9"
+            ],
+            []
+        ]
+    },
+    {
+        "id": "0e3066a1c227bc7e",
+        "type": "inject",
+        "z": "abc13765.990d38",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": "",
+        "topic": "",
+        "payload": "0",
+        "payloadType": "num",
+        "x": 270,
+        "y": 4200,
+        "wires": [
+            [
+                "f17ba772e7022efd"
+            ]
+        ]
+    },
+    {
+        "id": "67380b6eb1347ada",
+        "type": "modbus-read",
+        "z": "abc13765.990d38",
+        "name": "47083",
+        "topic": "47083",
+        "showStatusActivities": false,
+        "logIOActivities": false,
+        "showErrors": true,
+        "unitid": "1",
+        "dataType": "HoldingRegister",
+        "adr": "47083",
+        "quantity": "1",
+        "rate": "99",
+        "rateUnit": "h",
+        "delayOnStart": false,
+        "startDelayTime": "",
+        "server": "26d6b97598760778",
+        "useIOFile": false,
+        "ioFile": "",
+        "useIOForPayload": false,
+        "emptyMsgOnFail": false,
+        "x": 250,
+        "y": 4360,
+        "wires": [
+            [
+                "e934a8a9c567f857",
+                "5fcdd4e3bd4f70c3"
+            ],
+            []
+        ]
+    },
+    {
+        "id": "e934a8a9c567f857",
+        "type": "buffer-parser",
+        "z": "abc13765.990d38",
+        "name": "buffer",
+        "data": "responseBuffer.buffer",
+        "dataType": "msg",
+        "specification": "spec",
+        "specificationType": "ui",
+        "items": [
+            {
+                "type": "uint16be",
+                "name": "time",
+                "offset": 0,
+                "length": 1,
+                "offsetbit": 0,
+                "scale": "1",
+                "mask": ""
+            }
+        ],
+        "swap1": "",
+        "swap2": "",
+        "swap3": "",
+        "swap1Type": "swap",
+        "swap2Type": "swap",
+        "swap3Type": "swap",
+        "msgProperty": "payload",
+        "msgPropertyType": "str",
+        "resultType": "keyvalue",
+        "resultTypeType": "return",
+        "multipleResult": false,
+        "fanOutMultipleResult": false,
+        "setTopic": true,
+        "outputs": 1,
+        "x": 490,
+        "y": 4420,
+        "wires": [
+            [
+                "5fcdd4e3bd4f70c3"
+            ]
+        ]
+    },
+    {
+        "id": "5fcdd4e3bd4f70c3",
+        "type": "debug",
+        "z": "abc13765.990d38",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 790,
+        "y": 4380,
+        "wires": []
+    },
+    {
+        "id": "045bfe6d0e80139d",
+        "type": "buffer-maker",
+        "z": "abc13765.990d38",
+        "name": "",
+        "specification": "spec",
+        "specificationType": "ui",
+        "items": [
+            {
+                "name": "item1",
+                "type": "uint8",
+                "length": 1,
+                "dataType": "msg",
+                "data": "payload"
+            }
+        ],
+        "swap1": "",
+        "swap2": "",
+        "swap3": "",
+        "swap1Type": "swap",
+        "swap2Type": "swap",
+        "swap3Type": "swap",
+        "msgProperty": "payload",
+        "msgPropertyType": "str",
+        "x": 650,
+        "y": 4580,
+        "wires": [
+            [
+                "55bedb303c68f17f"
+            ]
+        ]
+    },
+    {
+        "id": "86ac6ec4ee1e1cc1",
+        "type": "inject",
+        "z": "abc13765.990d38",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": "",
+        "topic": "",
+        "payload": "5",
+        "payloadType": "num",
+        "x": 250,
+        "y": 4520,
+        "wires": [
+            [
+                "d4de4a272f26b088"
+            ]
+        ]
+    },
+    {
+        "id": "55bedb303c68f17f",
+        "type": "debug",
+        "z": "abc13765.990d38",
+        "name": "",
+        "active": true,
+        "console": "false",
+        "complete": "false",
+        "x": 970,
+        "y": 4540,
+        "wires": []
+    },
+    {
+        "id": "d4de4a272f26b088",
+        "type": "modbus-write",
+        "z": "abc13765.990d38",
+        "name": "47083",
+        "showStatusActivities": false,
+        "showErrors": true,
+        "unitid": "1",
+        "dataType": "HoldingRegister",
+        "adr": "47083",
+        "quantity": "1",
+        "server": "26d6b97598760778",
+        "emptyMsgOnFail": false,
+        "keepMsgProperties": false,
+        "x": 710,
+        "y": 4500,
+        "wires": [
+            [
+                "55bedb303c68f17f"
+            ],
+            []
+        ]
+    },
+    {
+        "id": "dd1c04e44193bcc2",
+        "type": "inject",
+        "z": "abc13765.990d38",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": "",
+        "topic": "",
+        "payload": "30",
+        "payloadType": "num",
+        "x": 250,
+        "y": 4580,
+        "wires": [
+            [
+                "d4de4a272f26b088"
+            ]
+        ]
+    },
+    {
+        "id": "da72ef5f704ea3ff",
+        "type": "modbus-read",
+        "z": "abc13765.990d38",
+        "name": "47247",
+        "topic": "47247",
+        "showStatusActivities": false,
+        "logIOActivities": false,
+        "showErrors": true,
+        "unitid": "1",
+        "dataType": "HoldingRegister",
+        "adr": "47247",
+        "quantity": "4",
+        "rate": "99",
+        "rateUnit": "h",
+        "delayOnStart": false,
+        "startDelayTime": "",
+        "server": "26d6b97598760778",
+        "useIOFile": false,
+        "ioFile": "",
+        "useIOForPayload": false,
+        "emptyMsgOnFail": false,
+        "x": 250,
+        "y": 4780,
+        "wires": [
+            [
+                "c33ad20feb33350b",
+                "5e41a88b88f2bdda"
+            ],
+            []
+        ]
+    },
+    {
+        "id": "c33ad20feb33350b",
+        "type": "buffer-parser",
+        "z": "abc13765.990d38",
+        "name": "buffer",
+        "data": "responseBuffer.buffer",
+        "dataType": "msg",
+        "specification": "spec",
+        "specificationType": "ui",
+        "items": [
+            {
+                "type": "uint32be",
+                "name": "force_power",
+                "offset": 0,
+                "length": 1,
+                "offsetbit": 0,
+                "scale": "1",
+                "mask": ""
+            }
+        ],
+        "swap1": "",
+        "swap2": "",
+        "swap3": "",
+        "swap1Type": "swap",
+        "swap2Type": "swap",
+        "swap3Type": "swap",
+        "msgProperty": "payload",
+        "msgPropertyType": "str",
+        "resultType": "keyvalue",
+        "resultTypeType": "return",
+        "multipleResult": false,
+        "fanOutMultipleResult": false,
+        "setTopic": true,
+        "outputs": 1,
+        "x": 490,
+        "y": 4840,
+        "wires": [
+            [
+                "5e41a88b88f2bdda"
+            ]
+        ]
+    },
+    {
+        "id": "5e41a88b88f2bdda",
+        "type": "debug",
+        "z": "abc13765.990d38",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 790,
+        "y": 4800,
+        "wires": []
+    },
+    {
+        "id": "05a19962e810bc60",
+        "type": "inject",
+        "z": "abc13765.990d38",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": "",
+        "topic": "",
+        "payload": "1000",
+        "payloadType": "str",
+        "x": 230,
+        "y": 4920,
+        "wires": [
+            [
+                "0531ac0e39cac568"
+            ]
+        ]
+    },
+    {
+        "id": "acb9ac190f0a09a9",
+        "type": "debug",
+        "z": "abc13765.990d38",
+        "name": "",
+        "active": true,
+        "console": "false",
+        "complete": "false",
+        "x": 950,
+        "y": 4940,
+        "wires": []
+    },
+    {
+        "id": "9fe2d75b03390748",
+        "type": "inject",
+        "z": "abc13765.990d38",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": "",
+        "topic": "",
+        "payload": "2000",
+        "payloadType": "num",
+        "x": 230,
+        "y": 4980,
+        "wires": [
+            [
+                "0531ac0e39cac568"
+            ]
+        ]
+    },
+    {
+        "id": "0531ac0e39cac568",
+        "type": "function",
+        "z": "abc13765.990d38",
+        "name": "function 1",
+        "func": "var fc = 16;\nvar sa = 47247;\nvar addresses = 2;\nvar buf = Buffer.alloc(4);//create buffer\nbuf.writeUInt32BE(msg.payload);\nvar values = [(buf[0] * 256 + buf[1]), (buf[2] * 256) + buf[3]]\nmsg.payload = { \"value\": values, 'fc': fc, 'unitid': 1, 'address': sa, 'quantity': addresses };\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 500,
+        "y": 4940,
+        "wires": [
+            [
+                "acb9ac190f0a09a9",
+                "202d1af150114891"
+            ]
+        ]
+    },
+    {
+        "id": "202d1af150114891",
+        "type": "modbus-flex-write",
+        "z": "abc13765.990d38",
+        "name": "",
+        "showStatusActivities": false,
+        "showErrors": false,
+        "server": "26d6b97598760778",
+        "emptyMsgOnFail": false,
+        "keepMsgProperties": false,
+        "x": 730,
+        "y": 4880,
+        "wires": [
+            [
+                "acb9ac190f0a09a9"
+            ],
+            []
+        ]
+    },
+    {
+        "id": "26d6b97598760778",
+        "type": "modbus-client",
+        "name": "EW11",
+        "clienttype": "tcp",
+        "bufferCommands": true,
+        "stateLogEnabled": false,
+        "queueLogEnabled": false,
+        "tcpHost": "192.168.1.183",
+        "tcpPort": "502",
+        "tcpType": "DEFAULT",
+        "serialPort": "/dev/ttyUSB",
+        "serialType": "RTU-BUFFERD",
+        "serialBaudrate": "9600",
+        "serialDatabits": "8",
+        "serialStopbits": "1",
+        "serialParity": "none",
+        "serialConnectionDelay": "100",
+        "serialAsciiResponseStartDelimiter": "0x3A",
+        "unit_id": 1,
+        "commandDelay": 1,
+        "clientTimeout": 3000,
+        "reconnectOnTimeout": true,
+        "reconnectTimeout": 2000,
+        "parallelUnitIdsAllowed": true
+    },
+    {
+        "id": "7268a3b9.f3b0fc",
+        "type": "server",
+        "name": "Home Assistant",
+        "version": 4,
+        "addon": false,
+        "rejectUnauthorizedCerts": true,
+        "ha_boolean": "y|yes|true|on|home|open",
+        "connectionDelay": true,
+        "cacheJson": true,
+        "heartbeat": false,
+        "heartbeatInterval": "30",
+        "areaSelector": "friendlyName",
+        "deviceSelector": "friendlyName",
+        "entitySelector": "friendlyName",
+        "statusSeparator": "at: ",
+        "statusYear": "hidden",
+        "statusMonth": "short",
+        "statusDay": "numeric",
+        "statusHourCycle": "h23",
+        "statusTimeFormat": "h:m"
+    }
+]

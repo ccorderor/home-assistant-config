@@ -1,0 +1,35 @@
+substitutions:
+  name: esp32-bluetooth-proxy-cfc878
+  board: esp32doit-devkit-v1
+
+esphome:
+  name: ${name}
+
+esp32:
+  board: ${board}
+  framework:
+    type: esp-idf
+    sdkconfig_options:
+      CONFIG_BT_BLE_42_FEATURES_SUPPORTED: y
+
+wifi:
+  ssid: !secret wifi_iot_ssid
+  password: !secret wifi_iot_password
+
+# Enable logging
+logger:
+
+  
+
+# Enable Home Assistant API
+api:
+
+ota:
+
+esp32_ble_tracker:
+  scan_parameters:
+    interval: 1100ms
+    window: 1100ms
+    active: true
+
+bluetooth_proxy:

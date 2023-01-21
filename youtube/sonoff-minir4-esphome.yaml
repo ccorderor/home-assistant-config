@@ -1,0 +1,90 @@
+esphome:
+  name: test-minir4
+
+esp32:
+  board: esp32dev
+  framework:
+    type: arduino
+
+# Enable logging
+logger:
+
+# Enable Home Assistant API
+api:
+  encryption:
+    key: "xxxxxxxxxx"
+
+ota:
+  password: "xxxxx"
+
+wifi:
+  ssid: !secret wifi_ssid
+  password: !secret wifi_password
+
+  # Enable fallback hotspot (captive portal) in case wifi connection fails
+  ap:
+    ssid: "Test-Minir4 Fallback Hotspot"
+    password: "xxxxxxxxxxx"
+
+captive_portal:
+
+
+#esp32_ble_tracker:
+#  scan_parameters:
+#    interval: 1100ms
+#    window: 1100ms
+
+#bluetooth_proxy:
+
+
+switch:
+  - platform: gpio
+    name: Rele MiniR4
+    pin:
+      number: GPIO26
+      inverted: false
+    id: relay
+    on_turn_on:
+      - light.turn_on: relay_led
+    on_turn_off:
+      - light.turn_off: relay_led
+
+output:
+  - platform: gpio
+    pin: GPIO19
+    inverted: True
+    id: relay1_led_gpio
+
+light:
+  - platform: binary
+    name: "Relay LED"
+    id: relay_led
+    internal: true    
+    output: relay1_led_gpio
+
+binary_sensor:
+  - platform: gpio
+    pin:
+      number: GPIO27
+      mode: INPUT_PULLUP
+      inverted: false
+    name: Mini R4 Switch
+    on_state:
+      - switch.toggle: relay
+#    on_state:
+#      if:
+#        condition:
+#          not:
+#            api.connected:
+#        then:
+#          - switch.toggle: relay
+  - platform: gpio
+    internal: true
+    pin:
+      number: GPIO0
+      mode: INPUT_PULLUP
+      inverted: false
+    name: Mini R4 Boton
+    on_press:
+      - switch.toggle: relay
+

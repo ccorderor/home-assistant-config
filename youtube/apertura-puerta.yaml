@@ -1,0 +1,88 @@
+substitutions:
+  name: entrada-calle
+
+esphome:
+  name: ${name}
+  name_add_mac_suffix: true
+
+esp32:
+  board: esp32dev
+  framework:
+    type: esp-idf
+    version: recommended
+    # Custom sdkconfig options
+    sdkconfig_options:
+      CONFIG_COMPILER_OPTIMIZATION_SIZE: y
+    # Advanced tweaking options
+    advanced:
+      ignore_efuse_mac_crc: false
+
+# Enable logging
+logger:
+
+# Enable Home Assistant API
+api:
+  encryption:
+    key: "xxxxxx"
+
+ota:
+  password: "xxxxxx"
+
+wifi:
+  ssid: !secret wifi_iot_ssid
+  password: !secret wifi_iot_password
+
+  # Enable fallback hotspot (captive portal) in case wifi connection fails
+  ap:
+    ssid: "entrada-calle-iot"
+    password: "xxxx"
+
+#esp32_ble_tracker:
+#  scan_parameters:
+   # interval: 1100ms
+  #  window: 1100ms
+   # active: false
+
+#bluetooth_proxy:
+ # active: false
+
+switch:
+  - platform: gpio
+    name: "Rele apertura puerta"
+    id: "relay"
+    pin: GPIO16
+    on_turn_on:
+    - delay: 500ms
+    - switch.turn_off: relay
+
+button:
+  - platform: template
+    id: "pulsador_apertura_calle"
+    name: "Pulsador Apertura Calle"
+    on_press:
+      then:
+        - switch.turn_on: relay
+  - platform: restart
+    name: "Door Esp Restart"
+    
+binary_sensor:
+  - platform: status
+    name: "apertura_puerta_calle"
+  - platform: gpio
+    pin:
+      number: GPIO17
+      #inverted: True
+      mode: INPUT_PULLUP
+    name: "door"
+    device_class: door
+    filters:
+      - delayed_on_off: 500ms
+    
+sensor:
+  - platform: wifi_signal
+    name: "WiFi Signal Sensor"
+    update_interval: 15s
+
+
+  
+    

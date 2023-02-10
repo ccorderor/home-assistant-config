@@ -1,0 +1,1187 @@
+[
+    {
+        "id": "459a9065.09cd6",
+        "type": "inject",
+        "z": "f94606df.a9e2d8",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "3",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 160,
+        "y": 300,
+        "wires": [
+            [
+                "86e05e7b.760ac"
+            ]
+        ]
+    },
+    {
+        "id": "86e05e7b.760ac",
+        "type": "http request",
+        "z": "f94606df.a9e2d8",
+        "name": "",
+        "method": "GET",
+        "ret": "obj",
+        "paytoqs": "ignore",
+        "url": "http://192.168.1.147/status?state&inputs&outputs",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "authType": "",
+        "x": 350,
+        "y": 300,
+        "wires": [
+            [
+                "47041450.ad4aac",
+                "ff3b18ae.e0c528"
+            ]
+        ]
+    },
+    {
+        "id": "ff3b18ae.e0c528",
+        "type": "debug",
+        "z": "f94606df.a9e2d8",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 470,
+        "y": 760,
+        "wires": []
+    },
+    {
+        "id": "47041450.ad4aac",
+        "type": "function",
+        "z": "f94606df.a9e2d8",
+        "name": "",
+        "func": "var volts = {}\nvolts.payload = parseInt(msg.payload.inputs[0].Vrms)\n\nvar acometida = {}\nacometida.payload = parseInt(msg.payload.inputs[1].Watts)\n\nvar solar = {}\nsolar.payload = parseInt(msg.payload.inputs[2].Watts)\n\nvar ev = {}\nev.payload = parseInt(msg.payload.inputs[3].Watts)\n\nvar alumbrado1 = {}\nalumbrado1.payload = parseInt(msg.payload.inputs[4].Watts)\n\nvar uv1 = {}\nuv1.payload = parseInt(msg.payload.inputs[5].Watts)\n\nvar lavadora = {}\nlavadora.payload = parseInt(msg.payload.inputs[6].Watts)\n\nvar lavavajillas = {}\nlavavajillas.payload = parseInt(msg.payload.inputs[7].Watts)\n\nvar caldera = {}\ncaldera.payload = parseInt(msg.payload.inputs[8].Watts)\n\nvar f_cocina = {}\nf_cocina.payload = parseInt(msg.payload.inputs[9].Watts)\n\nvar humedos = {}\nhumedos.payload = parseInt(msg.payload.inputs[10].Watts)\n\nvar secadora = {}\nsecadora.payload = parseInt(msg.payload.inputs[11].Watts)\n\nvar jardin = {}\njardin.payload = parseInt(msg.payload.inputs[12].Watts)\n\nvar alumbrado2 = {}\nalumbrado2.payload = parseInt(msg.payload.inputs[13].Watts)\n\nvar uv2 = {}\nuv2.payload = parseInt(msg.payload.inputs[14].Watts)\n\nvar consumo_total = {}\nconsumo_total.payload = parseInt(msg.payload.outputs[0].value)\n\nvar consumo_total_sinev = {}\nconsumo_total_sinev.payload = parseInt(msg.payload.outputs[1].value)\n\nvar diferencial1 = {}\ndiferencial1.payload = parseInt(msg.payload.outputs[3].value)\n\nvar diferencial2 = {}\ndiferencial2.payload = parseInt(msg.payload.outputs[4].value)\n\nreturn [volts,acometida,solar,ev,alumbrado1,uv1,lavadora,\nlavavajillas,caldera,f_cocina,humedos,secadora,\njardin,alumbrado2,uv2,consumo_total,\nconsumo_total_sinev,diferencial1,diferencial2];",
+        "outputs": 19,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "x": 560,
+        "y": 300,
+        "wires": [
+            [
+                "60b7a576.f2c7dc",
+                "419aa9d4.a45ff8"
+            ],
+            [
+                "162f91c7.b8f5de"
+            ],
+            [
+                "b834d26.f96613"
+            ],
+            [
+                "799a5d.59c205a4"
+            ],
+            [
+                "314e9c2b.3b51d4"
+            ],
+            [
+                "9289fc69.a5402"
+            ],
+            [
+                "73116a91.880944"
+            ],
+            [
+                "92fa9d46.92191"
+            ],
+            [
+                "5a180af1.25f514"
+            ],
+            [
+                "daad2a0a.5278c8"
+            ],
+            [
+                "736771d1.e5e51"
+            ],
+            [
+                "5b17611e.bd61b"
+            ],
+            [
+                "7b8715cf.3118cc"
+            ],
+            [
+                "41820132.db792"
+            ],
+            [
+                "d5214c72.c2272"
+            ],
+            [
+                "c0aa9a8f.05efa8"
+            ],
+            [
+                "b1a3965e.bae978"
+            ],
+            [
+                "2231fb3d.1d7814"
+            ],
+            [
+                "8203986c.8b9ae8"
+            ]
+        ]
+    },
+    {
+        "id": "60b7a576.f2c7dc",
+        "type": "ha-entity",
+        "z": "f94606df.a9e2d8",
+        "name": "iotawatt_volts",
+        "server": "7268a3b9.f3b0fc",
+        "version": 2,
+        "debugenabled": false,
+        "outputs": 1,
+        "entityType": "sensor",
+        "config": [
+            {
+                "property": "name",
+                "value": "iotawatt_volts"
+            },
+            {
+                "property": "device_class",
+                "value": "voltage"
+            },
+            {
+                "property": "icon",
+                "value": ""
+            },
+            {
+                "property": "unit_of_measurement",
+                "value": "V"
+            },
+            {
+                "property": "state_class",
+                "value": ""
+            },
+            {
+                "property": "last_reset",
+                "value": ""
+            }
+        ],
+        "state": "payload",
+        "stateType": "msg",
+        "attributes": [],
+        "resend": true,
+        "outputLocation": "",
+        "outputLocationType": "none",
+        "inputOverride": "allow",
+        "outputOnStateChange": false,
+        "outputPayload": "$entity().state ? \"on\": \"off\"",
+        "outputPayloadType": "jsonata",
+        "x": 960,
+        "y": 160,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "162f91c7.b8f5de",
+        "type": "ha-entity",
+        "z": "f94606df.a9e2d8",
+        "name": "iotawatt_acometida",
+        "server": "7268a3b9.f3b0fc",
+        "version": 2,
+        "debugenabled": false,
+        "outputs": 1,
+        "entityType": "sensor",
+        "config": [
+            {
+                "property": "name",
+                "value": "iotawatt_acometida"
+            },
+            {
+                "property": "device_class",
+                "value": "power"
+            },
+            {
+                "property": "icon",
+                "value": ""
+            },
+            {
+                "property": "unit_of_measurement",
+                "value": "W"
+            },
+            {
+                "property": "state_class",
+                "value": ""
+            },
+            {
+                "property": "last_reset",
+                "value": ""
+            }
+        ],
+        "state": "payload",
+        "stateType": "msg",
+        "attributes": [],
+        "resend": true,
+        "outputLocation": "",
+        "outputLocationType": "none",
+        "inputOverride": "allow",
+        "outputOnStateChange": false,
+        "outputPayload": "$entity().state ? \"on\": \"off\"",
+        "outputPayloadType": "jsonata",
+        "x": 970,
+        "y": 220,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "b834d26.f96613",
+        "type": "ha-entity",
+        "z": "f94606df.a9e2d8",
+        "name": "iotawatt_solar",
+        "server": "7268a3b9.f3b0fc",
+        "version": 2,
+        "debugenabled": false,
+        "outputs": 1,
+        "entityType": "sensor",
+        "config": [
+            {
+                "property": "name",
+                "value": "iotawatt_solar"
+            },
+            {
+                "property": "device_class",
+                "value": "power"
+            },
+            {
+                "property": "icon",
+                "value": ""
+            },
+            {
+                "property": "unit_of_measurement",
+                "value": "W"
+            },
+            {
+                "property": "state_class",
+                "value": ""
+            },
+            {
+                "property": "last_reset",
+                "value": ""
+            }
+        ],
+        "state": "payload",
+        "stateType": "msg",
+        "attributes": [],
+        "resend": true,
+        "outputLocation": "",
+        "outputLocationType": "none",
+        "inputOverride": "allow",
+        "outputOnStateChange": false,
+        "outputPayload": "$entity().state ? \"on\": \"off\"",
+        "outputPayloadType": "jsonata",
+        "x": 960,
+        "y": 280,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "799a5d.59c205a4",
+        "type": "ha-entity",
+        "z": "f94606df.a9e2d8",
+        "name": "iotawatt_ev",
+        "server": "7268a3b9.f3b0fc",
+        "version": 2,
+        "debugenabled": false,
+        "outputs": 1,
+        "entityType": "sensor",
+        "config": [
+            {
+                "property": "name",
+                "value": "iotawatt_ev"
+            },
+            {
+                "property": "device_class",
+                "value": "power"
+            },
+            {
+                "property": "icon",
+                "value": ""
+            },
+            {
+                "property": "unit_of_measurement",
+                "value": "W"
+            },
+            {
+                "property": "state_class",
+                "value": ""
+            },
+            {
+                "property": "last_reset",
+                "value": ""
+            }
+        ],
+        "state": "payload",
+        "stateType": "msg",
+        "attributes": [],
+        "resend": true,
+        "outputLocation": "",
+        "outputLocationType": "none",
+        "inputOverride": "allow",
+        "outputOnStateChange": false,
+        "outputPayload": "$entity().state ? \"on\": \"off\"",
+        "outputPayloadType": "jsonata",
+        "x": 950,
+        "y": 340,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "314e9c2b.3b51d4",
+        "type": "ha-entity",
+        "z": "f94606df.a9e2d8",
+        "name": "iotawatt_alumbrado1",
+        "server": "7268a3b9.f3b0fc",
+        "version": 2,
+        "debugenabled": false,
+        "outputs": 1,
+        "entityType": "sensor",
+        "config": [
+            {
+                "property": "name",
+                "value": "iotawatt_alumbrado1"
+            },
+            {
+                "property": "device_class",
+                "value": "power"
+            },
+            {
+                "property": "icon",
+                "value": ""
+            },
+            {
+                "property": "unit_of_measurement",
+                "value": "W"
+            },
+            {
+                "property": "state_class",
+                "value": ""
+            },
+            {
+                "property": "last_reset",
+                "value": ""
+            }
+        ],
+        "state": "payload",
+        "stateType": "msg",
+        "attributes": [],
+        "resend": true,
+        "outputLocation": "",
+        "outputLocationType": "none",
+        "inputOverride": "allow",
+        "outputOnStateChange": false,
+        "outputPayload": "$entity().state ? \"on\": \"off\"",
+        "outputPayloadType": "jsonata",
+        "x": 980,
+        "y": 400,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "9289fc69.a5402",
+        "type": "ha-entity",
+        "z": "f94606df.a9e2d8",
+        "name": "iotawatt_uv1",
+        "server": "7268a3b9.f3b0fc",
+        "version": 2,
+        "debugenabled": false,
+        "outputs": 1,
+        "entityType": "sensor",
+        "config": [
+            {
+                "property": "name",
+                "value": "iotawatt_uv1"
+            },
+            {
+                "property": "device_class",
+                "value": "power"
+            },
+            {
+                "property": "icon",
+                "value": ""
+            },
+            {
+                "property": "unit_of_measurement",
+                "value": "W"
+            },
+            {
+                "property": "state_class",
+                "value": ""
+            },
+            {
+                "property": "last_reset",
+                "value": ""
+            }
+        ],
+        "state": "payload",
+        "stateType": "msg",
+        "attributes": [],
+        "resend": true,
+        "outputLocation": "",
+        "outputLocationType": "none",
+        "inputOverride": "allow",
+        "outputOnStateChange": false,
+        "outputPayload": "$entity().state ? \"on\": \"off\"",
+        "outputPayloadType": "jsonata",
+        "x": 950,
+        "y": 460,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "daad2a0a.5278c8",
+        "type": "ha-entity",
+        "z": "f94606df.a9e2d8",
+        "name": "iotawatt_lavadora",
+        "server": "7268a3b9.f3b0fc",
+        "version": 2,
+        "debugenabled": false,
+        "outputs": 1,
+        "entityType": "sensor",
+        "config": [
+            {
+                "property": "name",
+                "value": "iotawatt_lavadora"
+            },
+            {
+                "property": "device_class",
+                "value": "power"
+            },
+            {
+                "property": "icon",
+                "value": ""
+            },
+            {
+                "property": "unit_of_measurement",
+                "value": "W"
+            },
+            {
+                "property": "state_class",
+                "value": ""
+            },
+            {
+                "property": "last_reset",
+                "value": ""
+            }
+        ],
+        "state": "payload",
+        "stateType": "msg",
+        "attributes": [],
+        "resend": true,
+        "outputLocation": "",
+        "outputLocationType": "none",
+        "inputOverride": "allow",
+        "outputOnStateChange": false,
+        "outputPayload": "$entity().state ? \"on\": \"off\"",
+        "outputPayloadType": "jsonata",
+        "x": 970,
+        "y": 520,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "92fa9d46.92191",
+        "type": "ha-entity",
+        "z": "f94606df.a9e2d8",
+        "name": "iotawatt_lavavajillas",
+        "server": "7268a3b9.f3b0fc",
+        "version": 2,
+        "debugenabled": false,
+        "outputs": 1,
+        "entityType": "sensor",
+        "config": [
+            {
+                "property": "name",
+                "value": "iotawatt_lavavajillas"
+            },
+            {
+                "property": "device_class",
+                "value": "power"
+            },
+            {
+                "property": "icon",
+                "value": ""
+            },
+            {
+                "property": "unit_of_measurement",
+                "value": "W"
+            },
+            {
+                "property": "state_class",
+                "value": ""
+            },
+            {
+                "property": "last_reset",
+                "value": ""
+            }
+        ],
+        "state": "payload",
+        "stateType": "msg",
+        "attributes": [],
+        "resend": true,
+        "outputLocation": "",
+        "outputLocationType": "none",
+        "inputOverride": "allow",
+        "outputOnStateChange": false,
+        "outputPayload": "$entity().state ? \"on\": \"off\"",
+        "outputPayloadType": "jsonata",
+        "x": 980,
+        "y": 580,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "5a180af1.25f514",
+        "type": "ha-entity",
+        "z": "f94606df.a9e2d8",
+        "name": "iotawatt_caldera",
+        "server": "7268a3b9.f3b0fc",
+        "version": 2,
+        "debugenabled": false,
+        "outputs": 1,
+        "entityType": "sensor",
+        "config": [
+            {
+                "property": "name",
+                "value": "iotawatt_caldera"
+            },
+            {
+                "property": "device_class",
+                "value": "power"
+            },
+            {
+                "property": "icon",
+                "value": ""
+            },
+            {
+                "property": "unit_of_measurement",
+                "value": "W"
+            },
+            {
+                "property": "state_class",
+                "value": ""
+            },
+            {
+                "property": "last_reset",
+                "value": ""
+            }
+        ],
+        "state": "payload",
+        "stateType": "msg",
+        "attributes": [],
+        "resend": true,
+        "outputLocation": "",
+        "outputLocationType": "none",
+        "inputOverride": "allow",
+        "outputOnStateChange": false,
+        "outputPayload": "$entity().state ? \"on\": \"off\"",
+        "outputPayloadType": "jsonata",
+        "x": 960,
+        "y": 640,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "73116a91.880944",
+        "type": "ha-entity",
+        "z": "f94606df.a9e2d8",
+        "name": "iotawatt_fcocina",
+        "server": "7268a3b9.f3b0fc",
+        "version": 2,
+        "debugenabled": false,
+        "outputs": 1,
+        "entityType": "sensor",
+        "config": [
+            {
+                "property": "name",
+                "value": "iotawatt_fcocina"
+            },
+            {
+                "property": "device_class",
+                "value": "power"
+            },
+            {
+                "property": "icon",
+                "value": ""
+            },
+            {
+                "property": "unit_of_measurement",
+                "value": "W"
+            },
+            {
+                "property": "state_class",
+                "value": ""
+            },
+            {
+                "property": "last_reset",
+                "value": ""
+            }
+        ],
+        "state": "payload",
+        "stateType": "msg",
+        "attributes": [],
+        "resend": true,
+        "outputLocation": "",
+        "outputLocationType": "none",
+        "inputOverride": "allow",
+        "outputOnStateChange": false,
+        "outputPayload": "$entity().state ? \"on\": \"off\"",
+        "outputPayloadType": "jsonata",
+        "x": 960,
+        "y": 700,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "736771d1.e5e51",
+        "type": "ha-entity",
+        "z": "f94606df.a9e2d8",
+        "name": "iotawatt_humedos",
+        "server": "7268a3b9.f3b0fc",
+        "version": 2,
+        "debugenabled": false,
+        "outputs": 1,
+        "entityType": "sensor",
+        "config": [
+            {
+                "property": "name",
+                "value": "iotawatt_humedos"
+            },
+            {
+                "property": "device_class",
+                "value": "power"
+            },
+            {
+                "property": "icon",
+                "value": ""
+            },
+            {
+                "property": "unit_of_measurement",
+                "value": "W"
+            },
+            {
+                "property": "state_class",
+                "value": ""
+            },
+            {
+                "property": "last_reset",
+                "value": ""
+            }
+        ],
+        "state": "payload",
+        "stateType": "msg",
+        "attributes": [],
+        "resend": true,
+        "outputLocation": "",
+        "outputLocationType": "none",
+        "inputOverride": "allow",
+        "outputOnStateChange": false,
+        "outputPayload": "$entity().state ? \"on\": \"off\"",
+        "outputPayloadType": "jsonata",
+        "x": 970,
+        "y": 760,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "5b17611e.bd61b",
+        "type": "ha-entity",
+        "z": "f94606df.a9e2d8",
+        "name": "iotawatt_secadora",
+        "server": "7268a3b9.f3b0fc",
+        "version": 2,
+        "debugenabled": false,
+        "outputs": 1,
+        "entityType": "sensor",
+        "config": [
+            {
+                "property": "name",
+                "value": "iotawatt_secadora"
+            },
+            {
+                "property": "device_class",
+                "value": "power"
+            },
+            {
+                "property": "icon",
+                "value": ""
+            },
+            {
+                "property": "unit_of_measurement",
+                "value": "W"
+            },
+            {
+                "property": "state_class",
+                "value": ""
+            },
+            {
+                "property": "last_reset",
+                "value": ""
+            }
+        ],
+        "state": "payload",
+        "stateType": "msg",
+        "attributes": [],
+        "resend": true,
+        "outputLocation": "",
+        "outputLocationType": "none",
+        "inputOverride": "allow",
+        "outputOnStateChange": false,
+        "outputPayload": "$entity().state ? \"on\": \"off\"",
+        "outputPayloadType": "jsonata",
+        "x": 970,
+        "y": 820,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "7b8715cf.3118cc",
+        "type": "ha-entity",
+        "z": "f94606df.a9e2d8",
+        "name": "iotawatt_jardin",
+        "server": "7268a3b9.f3b0fc",
+        "version": 2,
+        "debugenabled": false,
+        "outputs": 1,
+        "entityType": "sensor",
+        "config": [
+            {
+                "property": "name",
+                "value": "iotawatt_jardin"
+            },
+            {
+                "property": "device_class",
+                "value": "power"
+            },
+            {
+                "property": "icon",
+                "value": ""
+            },
+            {
+                "property": "unit_of_measurement",
+                "value": "W"
+            },
+            {
+                "property": "state_class",
+                "value": ""
+            },
+            {
+                "property": "last_reset",
+                "value": ""
+            }
+        ],
+        "state": "payload",
+        "stateType": "msg",
+        "attributes": [],
+        "resend": true,
+        "outputLocation": "",
+        "outputLocationType": "none",
+        "inputOverride": "allow",
+        "outputOnStateChange": false,
+        "outputPayload": "$entity().state ? \"on\": \"off\"",
+        "outputPayloadType": "jsonata",
+        "x": 960,
+        "y": 880,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "41820132.db792",
+        "type": "ha-entity",
+        "z": "f94606df.a9e2d8",
+        "name": "iotawatt_alumbrado2",
+        "server": "7268a3b9.f3b0fc",
+        "version": 2,
+        "debugenabled": false,
+        "outputs": 1,
+        "entityType": "sensor",
+        "config": [
+            {
+                "property": "name",
+                "value": "iotawatt_alumbrado2"
+            },
+            {
+                "property": "device_class",
+                "value": "power"
+            },
+            {
+                "property": "icon",
+                "value": ""
+            },
+            {
+                "property": "unit_of_measurement",
+                "value": "W"
+            },
+            {
+                "property": "state_class",
+                "value": ""
+            },
+            {
+                "property": "last_reset",
+                "value": ""
+            }
+        ],
+        "state": "payload",
+        "stateType": "msg",
+        "attributes": [],
+        "resend": true,
+        "outputLocation": "",
+        "outputLocationType": "none",
+        "inputOverride": "allow",
+        "outputOnStateChange": false,
+        "outputPayload": "$entity().state ? \"on\": \"off\"",
+        "outputPayloadType": "jsonata",
+        "x": 980,
+        "y": 940,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "d5214c72.c2272",
+        "type": "ha-entity",
+        "z": "f94606df.a9e2d8",
+        "name": "iotawatt_uv2",
+        "server": "7268a3b9.f3b0fc",
+        "version": 2,
+        "debugenabled": false,
+        "outputs": 1,
+        "entityType": "sensor",
+        "config": [
+            {
+                "property": "name",
+                "value": "iotawatt_uv2"
+            },
+            {
+                "property": "device_class",
+                "value": "power"
+            },
+            {
+                "property": "icon",
+                "value": ""
+            },
+            {
+                "property": "unit_of_measurement",
+                "value": "W"
+            },
+            {
+                "property": "state_class",
+                "value": ""
+            },
+            {
+                "property": "last_reset",
+                "value": ""
+            }
+        ],
+        "state": "payload",
+        "stateType": "msg",
+        "attributes": [],
+        "resend": true,
+        "outputLocation": "",
+        "outputLocationType": "none",
+        "inputOverride": "allow",
+        "outputOnStateChange": false,
+        "outputPayload": "$entity().state ? \"on\": \"off\"",
+        "outputPayloadType": "jsonata",
+        "x": 950,
+        "y": 1000,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "c0aa9a8f.05efa8",
+        "type": "ha-entity",
+        "z": "f94606df.a9e2d8",
+        "name": "iotawatt_consumototal",
+        "server": "7268a3b9.f3b0fc",
+        "version": 2,
+        "debugenabled": false,
+        "outputs": 1,
+        "entityType": "sensor",
+        "config": [
+            {
+                "property": "name",
+                "value": "iotawatt_consumototal"
+            },
+            {
+                "property": "device_class",
+                "value": "power"
+            },
+            {
+                "property": "icon",
+                "value": ""
+            },
+            {
+                "property": "unit_of_measurement",
+                "value": "W"
+            },
+            {
+                "property": "state_class",
+                "value": ""
+            },
+            {
+                "property": "last_reset",
+                "value": ""
+            }
+        ],
+        "state": "payload",
+        "stateType": "msg",
+        "attributes": [],
+        "resend": true,
+        "outputLocation": "",
+        "outputLocationType": "none",
+        "inputOverride": "allow",
+        "outputOnStateChange": false,
+        "outputPayload": "$entity().state ? \"on\": \"off\"",
+        "outputPayloadType": "jsonata",
+        "x": 980,
+        "y": 1060,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "b1a3965e.bae978",
+        "type": "ha-entity",
+        "z": "f94606df.a9e2d8",
+        "name": "iotawatt_consumototalsinev",
+        "server": "7268a3b9.f3b0fc",
+        "version": 2,
+        "debugenabled": false,
+        "outputs": 1,
+        "entityType": "sensor",
+        "config": [
+            {
+                "property": "name",
+                "value": "iotawatt_consumototalsinev"
+            },
+            {
+                "property": "device_class",
+                "value": "power"
+            },
+            {
+                "property": "icon",
+                "value": ""
+            },
+            {
+                "property": "unit_of_measurement",
+                "value": "W"
+            },
+            {
+                "property": "state_class",
+                "value": ""
+            },
+            {
+                "property": "last_reset",
+                "value": ""
+            }
+        ],
+        "state": "payload",
+        "stateType": "msg",
+        "attributes": [],
+        "resend": true,
+        "outputLocation": "",
+        "outputLocationType": "none",
+        "inputOverride": "allow",
+        "outputOnStateChange": false,
+        "outputPayload": "$entity().state ? \"on\": \"off\"",
+        "outputPayloadType": "jsonata",
+        "x": 1000,
+        "y": 1120,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "2231fb3d.1d7814",
+        "type": "ha-entity",
+        "z": "f94606df.a9e2d8",
+        "name": "iotawatt_diferencial1",
+        "server": "7268a3b9.f3b0fc",
+        "version": 2,
+        "debugenabled": false,
+        "outputs": 1,
+        "entityType": "sensor",
+        "config": [
+            {
+                "property": "name",
+                "value": "iotawatt_diferencial1"
+            },
+            {
+                "property": "device_class",
+                "value": "power"
+            },
+            {
+                "property": "icon",
+                "value": ""
+            },
+            {
+                "property": "unit_of_measurement",
+                "value": "W"
+            },
+            {
+                "property": "state_class",
+                "value": ""
+            },
+            {
+                "property": "last_reset",
+                "value": ""
+            }
+        ],
+        "state": "payload",
+        "stateType": "msg",
+        "attributes": [],
+        "resend": true,
+        "outputLocation": "",
+        "outputLocationType": "none",
+        "inputOverride": "allow",
+        "outputOnStateChange": false,
+        "outputPayload": "$entity().state ? \"on\": \"off\"",
+        "outputPayloadType": "jsonata",
+        "x": 980,
+        "y": 1180,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "8203986c.8b9ae8",
+        "type": "ha-entity",
+        "z": "f94606df.a9e2d8",
+        "name": "iotawatt_diferencial2",
+        "server": "7268a3b9.f3b0fc",
+        "version": 2,
+        "debugenabled": false,
+        "outputs": 1,
+        "entityType": "sensor",
+        "config": [
+            {
+                "property": "name",
+                "value": "iotawatt_diferencial2"
+            },
+            {
+                "property": "device_class",
+                "value": "power"
+            },
+            {
+                "property": "icon",
+                "value": ""
+            },
+            {
+                "property": "unit_of_measurement",
+                "value": "W"
+            },
+            {
+                "property": "state_class",
+                "value": ""
+            },
+            {
+                "property": "last_reset",
+                "value": ""
+            }
+        ],
+        "state": "payload",
+        "stateType": "msg",
+        "attributes": [],
+        "resend": true,
+        "outputLocation": "",
+        "outputLocationType": "none",
+        "inputOverride": "allow",
+        "outputOnStateChange": false,
+        "outputPayload": "$entity().state ? \"on\": \"off\"",
+        "outputPayloadType": "jsonata",
+        "x": 980,
+        "y": 1240,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "419aa9d4.a45ff8",
+        "type": "mqtt out",
+        "z": "f94606df.a9e2d8",
+        "name": "",
+        "topic": "openevse/current_voltage",
+        "qos": "",
+        "retain": "",
+        "broker": "56258d61.b7acc4",
+        "x": 990,
+        "y": 100,
+        "wires": []
+    },
+    {
+        "id": "7268a3b9.f3b0fc",
+        "type": "server",
+        "name": "Home Assistant",
+        "version": 4,
+        "addon": false,
+        "rejectUnauthorizedCerts": true,
+        "ha_boolean": "y|yes|true|on|home|open",
+        "connectionDelay": true,
+        "cacheJson": true,
+        "heartbeat": false,
+        "heartbeatInterval": "30",
+        "areaSelector": "friendlyName",
+        "deviceSelector": "friendlyName",
+        "entitySelector": "friendlyName",
+        "statusSeparator": "at: ",
+        "statusYear": "hidden",
+        "statusMonth": "short",
+        "statusDay": "numeric",
+        "statusHourCycle": "h23",
+        "statusTimeFormat": "h:m"
+    },
+    {
+        "id": "56258d61.b7acc4",
+        "type": "mqtt-broker",
+        "name": "",
+        "broker": "192.168.1.15",
+        "port": "1883",
+        "clientid": "",
+        "usetls": false,
+        "compatmode": true,
+        "keepalive": "60",
+        "cleansession": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthPayload": "",
+        "closeTopic": "",
+        "closeQos": "0",
+        "closePayload": "",
+        "willTopic": "",
+        "willQos": "0",
+        "willPayload": ""
+    }
+]

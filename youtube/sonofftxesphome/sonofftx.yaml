@@ -1,0 +1,313 @@
+# Built using:
+# https://gist.github.com/wolph/42024a983e4dfb0bc1dcbe6882979d21
+
+substitutions:
+  name: 'sonoff-tx-ultimate'
+  brightness_on: 80%
+  brightness_nightlight: 0%
+
+esphome:
+  name: $name
+  platform: ESP32
+  board: esp32dev
+   
+
+  on_boot:
+    priority: -100.0
+    then:
+      - button.press: light_relays
+
+  includes:
+    - touch_panel.hpp
+    - touch_panel.cpp
+
+# Enable logging
+logger:
+#  level: DEBUG
+
+# Enable Home Assistant API
+api:
+
+ota:
+
+wifi:
+  ssid: !secret XXXXXXX
+  password: !secret XXXXXXXX
+
+  # Enable fallback hotspot (captive portal) in case wifi connection fails
+  ap:
+    ssid: "Tx-Hallway"
+    password: "123248479238"
+
+## Enable Bluetooth Proxy
+#esp32_ble_tracker:
+#    scan_parameters:
+#      interval: 1100ms
+#      window: 1100ms
+#      active: true
+
+#bluetooth_proxy:
+#  active: true
+
+# Home Assistant Light State
+text_sensor:
+  - platform: homeassistant
+    name: "Hallway Light"
+    id: hallway_light
+    entity_id: light.hallway_light
+    on_value:
+      button.press: light_relays
+
+  - platform: homeassistant
+    id: toilet_light
+    entity_id: light.toilet_light
+    on_value:
+      button.press: light_relays
+
+  - platform: homeassistant
+    id: night_mode
+    entity_id: input_boolean.gone_to_bed
+
+uart:
+  id: uart_bus
+  tx_pin: 19
+  rx_pin: 22
+  baud_rate: 115200
+
+button:
+  - platform: template
+    name: light relays
+    id: light_relays
+    on_press:
+      - if:
+          condition:
+              switch.is_on: relay1
+          then:
+            - light.turn_on:
+                id: rgb_light
+                brightness: ${brightness_on}
+                red: 0%
+                green: 100%
+                blue: 0%
+                transition_length: 500ms
+          else:
+            - light.turn_on:
+                id: rgb_light
+                brightness: ${brightness_nightlight}
+                red: 0%
+                green: 0%
+                blue: 0%
+                transition_length: 2s
+      
+      
+
+binary_sensor:
+  - platform: custom
+    lambda: |- 
+        auto touch_panel = new touch_panel::TouchPanel(id(uart_bus));
+        App.register_component(touch_panel);
+        return {
+          touch_panel->left,
+          touch_panel->middle,
+          touch_panel->right,
+          touch_panel->two_finger,
+          touch_panel->dragged_ltr,
+          touch_panel->dragged_rtl,
+        };
+    binary_sensors:
+      - id: button_left
+        name: "Left Button"
+        on_press:
+          - switch.toggle: relay1
+          - switch.turn_on: haptics
+          - delay: 2s
+          - button.press: light_relays
+      - id: button_two_finger
+        name: "Two Fingers"
+      - id: button_dragged_ltr
+        name: "Dragged Left to Right"
+      - id: button_dragged_rtl
+        name: "Dragged Right to Left"
+
+
+# Switch Relays
+switch:
+  - platform: gpio
+    name: "relay left"
+    pin: GPIO18
+    id: relay1
+    restore_mode: ALWAYS_ON
+    on_turn_on:
+      button.press: light_relays
+    on_turn_off:
+      button.press: light_relays
+  - platform: gpio
+    name: "relay middle"
+    pin: GPIO17
+    id: relay2
+    restore_mode: ALWAYS_OFF
+    on_turn_on:
+      button.press: light_relays
+    on_turn_off:
+      button.press: light_relays
+  - platform: gpio
+    name: "relay right"
+    pin: GPIO27
+    id: relay3
+    restore_mode: ALWAYS_OFF
+    on_turn_on:
+      button.press: light_relays
+    on_turn_off:
+      button.press: light_relays
+  - platform: gpio
+    name: "relay right"
+    pin: GPIO23
+    id: relay4
+    on_turn_on:
+      button.press: light_relays
+    on_turn_off:
+      button.press: light_relays
+ # - platform: gpio
+ #   name: "sound amplifier power"
+ #   pin: GPIO26
+ #   id: pa_sw
+
+  - platform: gpio
+    name: "touch panel power"
+    pin:
+      number: GPIO5
+      inverted: true
+    id: ca51_pow
+    restore_mode: RESTORE_DEFAULT_ON
+  - platform: gpio
+    pin: GPIO21
+    name: "Haptics"
+    id: "haptics"
+    restore_mode: ALWAYS_OFF
+    on_turn_on:
+      - delay: 400ms
+      - switch.turn_off: haptics
+
+
+# Light
+light:
+  - platform: neopixelbus
+    type: GRB
+    variant: WS2812
+    pin: GPIO13
+    num_leds: 1
+    name: "NeoPixel 13"
+    internal: true
+  - platform: neopixelbus
+    type: GRB
+    variant: WS2812
+    # pin: GPIO20
+    pin: GPIO33
+    num_leds: 28
+    name: "Ambience Nightlight"
+    id: rgb_light
+    effects:
+      - addressable_rainbow:
+          name: 'rainbow fast'
+          speed: 50
+      - pulse:
+      - pulse:
+          name: "Fast Pulse"
+          transition_length: 0.5s
+          update_interval: 0.5s
+      - pulse:
+          name: "Slow Pulse"
+          # transition_length: 1s      # defaults to 1s
+          update_interval: 2s
+      - addressable_scan:
+      - addressable_scan:
+          name: Scan Effect With Custom Values
+          move_interval: 100ms
+          scan_width: 3
+      - addressable_twinkle:
+      - addressable_twinkle:
+          name: Twinkle Effect With Custom Values
+          twinkle_probability: 5%
+          progress_interval: 4ms
+      - addressable_random_twinkle:
+      - addressable_random_twinkle:
+          name: Random Twinkle Effect With Custom Values
+          twinkle_probability: 20%
+          progress_interval: 32ms
+      - addressable_fireworks:
+      - addressable_fireworks:
+          name: Fireworks Effect With Custom Values
+          update_interval: 32ms
+          spark_probability: 10%
+          use_random_color: false
+          fade_out_rate: 120
+      - addressable_flicker:
+      - addressable_flicker:
+          name: Flicker Effect With Custom Values
+          update_interval: 16ms
+          intensity: 5%
+
+  - platform: partition
+    id: light_left_both
+    name: "light left both"
+    segments:
+      - id: rgb_light
+        from: 11
+        to: 21
+
+  - platform: partition
+    id: light_middle_both
+    name: "light middle both"
+    segments:
+      - id: rgb_light
+        from: 22
+        to: 24
+      - id: rgb_light
+        from: 8
+        to: 10
+
+  - platform: partition
+    id: light_right_both
+    name: "light right both"
+    segments:
+      - id: rgb_light
+        from: 0
+        to: 7
+      - id: rgb_light
+        from: 25
+        to: 27
+
+  - platform: partition
+    id: light_right
+    name: "light right"
+    segments:
+      - id: rgb_light
+        from: 0
+        to: 5
+
+  - platform: partition
+    id: light_left
+    name: "light left"
+    segments:
+      - id: rgb_light
+        from: 13
+        to: 19
+
+
+# I2S audio component
+i2s_audio:
+  i2s_bclk_pin: GPIO2   # BCK
+  i2s_lrclk_pin: GPIO4  # WS
+
+# Player component for I2S
+media_player:
+  - platform: i2s_audio
+    name: Speaker
+    dac_type: external
+    mode: mono
+    i2s_dout_pin: GPIO15
+    i2s_comm_fmt: lsb
+    mute_pin:
+        number: GPIO26
+        inverted: true
+

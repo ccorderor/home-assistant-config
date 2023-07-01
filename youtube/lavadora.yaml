@@ -1,0 +1,101 @@
+input_select:
+  washingmachine_status:
+    name: Washingmachine Status
+    options:
+     - "Apagada"
+     - "Funcionando"
+     - "Terminado"
+    initial: "Apagada"
+    icon: mdi:washing-machine
+
+
+automation:
+  - alias: Action - Set washing machine to running
+    trigger:
+    - platform: numeric_state
+      entity_id: sensor.lavadora_current_consumption
+      above: '5'
+      for:
+        minutes: 3
+    action:
+    - service: input_select.select_option
+      data:
+        entity_id: input_select.washingmachine_status
+        option: "Funcionando"
+
+  - alias: Action - Set washing machine as finished
+    trigger:
+    - platform: numeric_state
+      entity_id: sensor.lavadora_current_consumption
+      below: '5'
+      for:
+        minutes: 2
+    condition:
+    - condition: state
+      entity_id: input_select.washingmachine_status
+      state: "Funcionando"
+    action:
+    - service: input_select.select_option
+      data:
+        entity_id: input_select.washingmachine_status
+        option: "Terminado"
+
+  - alias: Notify - Washing machine finished
+    trigger:
+    - platform: state
+      entity_id: input_select.washingmachine_status
+      to: "Terminado"
+    action:
+    - service: tts.cloud_say
+      data:
+        cache: true
+        entity_id: media_player.googlehome2507
+        message: Hola, parece que la lavadora ha terminado. ¿Podrías echarle un vistazo?
+        language: es-ES
+        options:
+          voice: EstrellaNeural
+    - service: notify.mobile_app_iphone_carlos_13
+      data:
+        message: La lavadora ha terminado
+        title: LAVADORA
+
+  - alias: Action - Lavadora sigue cerrada
+    mode: single
+    trigger:
+      - platform: time_pattern
+        minutes: /5
+    condition:
+      - condition: state
+        entity_id: input_select.washingmachine_status
+        state: "Terminado"
+    action:
+      - service: notify.mobile_app_iphone_carlos_13
+        data:
+          message: La lavadora sigue pendiente de abrir
+          title: LAVADORA
+      - service: tts.cloud_say
+        data:
+          cache: true
+          entity_id: media_player.googlehome2507
+          message: Hola. Siento molestarte, pero nadie se ha ocupado de la lavadora... y ya sabes... luego huele mal la ropa
+          language: es-ES
+          options:
+            voice: EstrellaNeural
+
+  - alias: Action - Lavadora abierta
+    mode: single
+    trigger:
+      - platform: state
+        entity_id:
+          - binary_sensor.0x00158d000303219d_contact
+        to: "on"
+    condition:
+      - condition: state
+        entity_id: input_select.washingmachine_status
+        state: "Terminado"
+    action:
+      - service: input_select.select_option
+        data:
+          option: "Apagada"
+        target:
+          entity_id: input_select.washingmachine_status

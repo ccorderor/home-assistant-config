@@ -1,0 +1,102 @@
+esphome:
+  name: ajax-esp-control
+  friendly_name: ajax-esp-control
+
+esp8266:
+  board: esp01_1m
+
+# Enable logging
+logger:
+
+# Enable Home Assistant API
+api:
+  encryption:
+    key: "xxxxxxx++STvpOe9uw="
+
+ota:
+  password: "xxxxxxx"
+
+wifi:
+  ssid: !secret wifi_iot_ssid
+  password: !secret wifi_iot_password
+
+  # Enable fallback hotspot (captive portal) in case wifi connection fails
+  ap:
+    ssid: "Ajax-Esp-Control"
+    password: "xxxxxx"
+
+captive_portal:
+
+web_server:
+  port: 80
+
+# Wifi signal
+sensor:
+  - platform: wifi_signal
+    name: "WiFi Signal Ajax ESP Control"
+    update_interval: 60s
+  - platform: uptime
+    name: Uptime Sensor Ajax ESP Control
+
+button:
+  - platform: template
+    name: Armado Total Ajax
+    on_press:
+      - switch.turn_on: arm
+
+  - platform: template
+    name: Desarmar Ajax
+    on_press:
+      - switch.turn_on: disarm
+
+  - platform: template
+    name: Armado Noche Ajax
+    on_press:
+      - switch.turn_on: night
+
+  - platform: template
+    name: Panico Ajax
+    on_press:
+      - switch.turn_on: panic
+    
+switch:
+  - platform: gpio
+    id: arm
+    name: Arm
+    internal: True
+    pin:
+      number: 12
+      inverted: true
+    on_turn_on:
+    - delay: 300ms
+    - switch.turn_off: arm
+  - platform: gpio
+    id: disarm
+    name: Disarm
+    internal: True
+    pin:
+      number: 4
+      inverted: true
+    on_turn_on:
+    - delay: 300ms
+    - switch.turn_off: disarm
+  - platform: gpio
+    id: panic
+    name: Panic
+    internal: True
+    pin:
+      number: 5
+      inverted: true
+    on_turn_on:
+    - delay: 300ms
+    - switch.turn_off: panic
+  - platform: gpio
+    id: night
+    name: Night
+    internal: True
+    pin:
+      number: 13
+      inverted: true
+    on_turn_on:
+    - delay: 300ms
+    - switch.turn_off: night
